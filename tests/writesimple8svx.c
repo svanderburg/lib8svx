@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     bodyData = (IFF_Byte*)malloc(SAMPLE_LENGTH * sizeof(IFF_Byte));
     
     for(i = 0; i < SAMPLE_LENGTH; i++)
-	bodyData[i] = (IFF_Byte)(127 * sin(i / 2));
+	bodyData[i] = (IFF_Byte)(127 * sin(i / 2.0));
     
     IFF_setRawChunkData((IFF_RawChunk*)body, (IFF_UByte*)bodyData, SAMPLE_LENGTH);
     
