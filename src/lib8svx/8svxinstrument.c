@@ -68,6 +68,40 @@ _8SVX_Instrument **_8SVX_extractInstruments(IFF_Chunk *chunk, unsigned int *inst
     }
 }
 
+_8SVX_Sample *_8SVX_extractSamples(_8SVX_Instrument *instrument, unsigned int *samplesLength)
+{
+    _8SVX_Sample *samples;
+    
+    if(instrument->voice8Header == NULL || instrument->body == NULL)
+    {
+	*samplesLength = 0;
+	samples = NULL;
+    }
+    else
+    {
+	IFF_UByte ctOctave = instrument->voice8Header->ctOctave;
+	unsigned int numOfSamples = instrument->voice8Header->oneShotHiSamples + instrument->voice8Header->repeatHiSamples;
+	unsigned int offset = 0;
+	unsigned int i;
+	
+	*samplesLength = ctOctave;
+	samples = (_8SVX_Sample*)malloc(ctOctave * sizeof(_8SVX_Sample));
+	
+	for(i = 0; i < ctOctave; i++)
+	{
+	    _8SVX_Sample *sample = &samples[i];
+    
+	    sample->sampleSize = numOfSamples;
+	    sample->body = instrument->body->chunkData + offset;
+	    
+	    offset += numOfSamples;
+	    numOfSamples *= 2;
+	}
+    }
+    
+    return samples;
+}
+
 IFF_Form *_8SVX_convertInstrumentToForm(_8SVX_Instrument *instrument)
 {
     IFF_Form *form = IFF_createForm("8SVX");

@@ -34,6 +34,14 @@
 
 typedef struct
 {
+    unsigned int sampleSize;
+    
+    IFF_Byte *body;
+}
+_8SVX_Sample;
+
+typedef struct
+{
     _8SVX_Voice8Header *voice8Header;
     
     _8SVX_Name *name;
@@ -56,6 +64,8 @@ _8SVX_Instrument;
 _8SVX_Instrument *_8SVX_createInstrument(void);
 
 _8SVX_Instrument **_8SVX_extractInstruments(IFF_Chunk *chunk, unsigned int *instrumentsLength);
+
+_8SVX_Sample *_8SVX_extractSamples(_8SVX_Instrument *instrument, unsigned int *samplesLength);
 
 IFF_Form *_8SVX_convertInstrumentToForm(_8SVX_Instrument *instrument);
 
