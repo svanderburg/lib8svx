@@ -23,8 +23,9 @@
 #define __8SVX_BODY_H
 
 #include <stdio.h>
-#include <ifftypes.h>
-#include <chunk.h>
+#include <libiff/ifftypes.h>
+#include <libiff/group.h>
+#include <libiff/chunk.h>
 
 typedef struct
 {

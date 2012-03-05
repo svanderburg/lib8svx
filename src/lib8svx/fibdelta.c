@@ -21,8 +21,8 @@
 
 #include "fibdelta.h"
 #include <stdlib.h>
-#include <ifftypes.h>
-#include <rawchunk.h>
+#include <libiff/ifftypes.h>
+#include <libiff/rawchunk.h>
 
 #define CODE_TO_DELTA_SIZE 16
 

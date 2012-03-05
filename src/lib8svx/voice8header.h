@@ -23,8 +23,9 @@
 #define __8SVX_VOICE8HEADER_H
 
 #include <stdio.h>
-#include <ifftypes.h>
-#include <chunk.h>
+#include <libiff/ifftypes.h>
+#include <libiff/group.h>
+#include <libiff/chunk.h>
 
 #define _8SVX_MAX_VOLUME 0x10000
 

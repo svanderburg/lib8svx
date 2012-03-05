@@ -20,8 +20,8 @@
  */
 
 #include "body.h"
-#include <rawchunk.h>
-#include <util.h>
+#include <libiff/rawchunk.h>
+#include <libiff/util.h>
 
 #define CHUNKID "BODY"
 

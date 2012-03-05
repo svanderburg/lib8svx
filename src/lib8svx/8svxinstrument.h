@@ -22,7 +22,7 @@
 #ifndef __8SVX_INSTRUMENT_H
 #define __8SVX_INSTRUMENT_H
 
-#include <form.h>
+#include <libiff/form.h>
 #include "voice8header.h"
 #include "name.h"
 #include "copyright.h"

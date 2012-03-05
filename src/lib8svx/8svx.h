@@ -21,7 +21,9 @@
 
 #ifndef __8SVX_H
 #define __8SVX_H
-#include <chunk.h>
+
+#include <stdio.h>
+#include <libiff/chunk.h>
 
 IFF_Chunk *_8SVX_readFd(FILE *file);
 

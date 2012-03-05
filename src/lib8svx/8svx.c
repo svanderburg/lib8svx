@@ -20,8 +20,7 @@
  */
 
 #include "8svx.h"
-#include <iff.h>
-#include <rawchunk.h>
+#include <libiff/iff.h>
 #include "copyright.h"
 #include "annotation.h"
 #include "author.h"

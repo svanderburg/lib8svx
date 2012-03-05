@@ -21,9 +21,8 @@
 
 #include "8svxinstrument.h"
 #include <stdlib.h>
-#include <form.h>
-#include <util.h>
-#include <error.h>
+#include <libiff/util.h>
+#include <libiff/error.h>
 #include "8svx.h"
 
 _8SVX_Instrument *_8SVX_createInstrument()

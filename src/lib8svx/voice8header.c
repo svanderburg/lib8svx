@@ -20,9 +20,9 @@
  */
 
 #include "voice8header.h"
-#include <io.h>
-#include <util.h>
-#include <error.h>
+#include <libiff/io.h>
+#include <libiff/util.h>
+#include <libiff/error.h>
 #include "8svx.h"
 
 #define CHUNKID "VHDR"

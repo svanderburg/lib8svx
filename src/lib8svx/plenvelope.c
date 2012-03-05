@@ -21,8 +21,8 @@
 
 #include "plenvelope.h"
 #include <stdlib.h>
-#include <io.h>
-#include <util.h>
+#include <libiff/io.h>
+#include <libiff/util.h>
 #include "8svx.h"
 
 _8SVX_PLEnvelope *_8SVX_createPLEnvelope(const char *chunkId)

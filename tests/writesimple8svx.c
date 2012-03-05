@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
-#include <form.h>
-#include <rawchunk.h>
+#include <libiff/form.h>
+#include <libiff/rawchunk.h>
 #include "8svxinstrument.h"
 #include "8svx.h"
 

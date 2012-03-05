@@ -23,7 +23,8 @@
 #define __8SVX_COPYRIGHT_H
 
 #include <stdio.h>
-#include <rawchunk.h>
+#include <libiff/chunk.h>
+#include <libiff/rawchunk.h>
 
 typedef IFF_RawChunk _8SVX_Copyright;
 

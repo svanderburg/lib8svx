@@ -22,7 +22,6 @@
 #include "pack.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <form.h>
 #include "8svx.h"
 #include "8svxinstrument.h"
 #include "fibdelta.h"
