@@ -61,8 +61,8 @@ an IFF file and returns an array of `_8SVX_Instrument` struct instances, which c
 be used to convienently access its properties. The length of the array is stored
 in the `instrumentsLength` variable:
 
-    #include "8svx.h"
-    #include "8svxinstrument.h"
+    #include <lib8svx/8svx.h>
+    #include <lib8svx/8svxinstrument.h>
     
     int main(int argc, char *argv[])
     {
@@ -81,7 +81,7 @@ An 8SVX file can be created by creating an instance of an `_8SVX_Instrument`
 struct and by setting its sub chunks. The following example defines a 8SVX
 instrument with a voice 8 header chunk:
 
-    #include "8svxinstrument.h"
+    #include <lib8svx/8svxinstrument.h>
     
     int main(int argc, char *argv[])
     {
@@ -116,7 +116,7 @@ individual `_8SVX_Instrument` struct instance.
 Since 8SVX instruments may have multiple octaves, the `_8SVX_extractSamples()`
 function can be used to retrieve to address them in a convenient manner.
 
-    #include "8svxinstrument.h"
+    #include <lib8svx/8svxinstrument.h>
     
     int main(int argc, char *argv[])
     {
@@ -147,8 +147,8 @@ To write an `_8SVX_Instrument` struct instance to a file, it must first be
 converted to an IFF FORM using the `_8SVX_convertInstrumentToForm()` function.
 Then the resulting FORM can written to disk using the `_8SVX_write()` function.
 
-    #include "8svxinstrument.h"
-    #include "8svx.h"
+    #include <lib8svx/8svxinstrument.h>
+    #include <lib8svx/8svx.h>
     
     int main(int argc, char *argv[])
     {
@@ -172,7 +172,7 @@ whether the file is valid. This can be done by invoking the
 `_8SVX_checkInstruments()` function, which checks whether the IFF file is valid
 and it checks whether are required 8SVX chunks are present.
 
-    #include "8svxinstrument.h"
+    #include <lib8svx/8svxinstrument.h>
     
     int main(int argc, char *argv[])
     {
@@ -196,8 +196,8 @@ A body of an instrument can be compressed by invoking the
 `_8SVX_packFibonacciDelta()` function. Uncompression can be done by invoking
 the `_8SVX_unpackFibonacciDelta()` function.
 
-    #include "8svxinstrument.h"
-    #include "fibdelta.h"
+    #include <lib8svx/8svxinstrument.h>
+    #include <lib8svx/fibdelta.h>
     
     int main(int argc, char *argv[])
     {
