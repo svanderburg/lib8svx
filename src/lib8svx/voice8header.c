@@ -142,11 +142,11 @@ void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLe
 {
     _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)chunk;
     
-    IFF_printIndent(stdout, indentLevel, "oneShotHiSamples = %d;\n", voice8Header->oneShotHiSamples);
-    IFF_printIndent(stdout, indentLevel, "repeatHiSamples = %d;\n", voice8Header->repeatHiSamples);
-    IFF_printIndent(stdout, indentLevel, "samplesPerHiCycle = %d;\n", voice8Header->samplesPerHiCycle);
-    IFF_printIndent(stdout, indentLevel, "samplesPerSec = %d;\n", voice8Header->samplesPerSec);
-    IFF_printIndent(stdout, indentLevel, "ctOctave = %d;\n", voice8Header->ctOctave);
-    IFF_printIndent(stdout, indentLevel, "sCompression = %d;\n", voice8Header->sCompression);
+    IFF_printIndent(stdout, indentLevel, "oneShotHiSamples = %u;\n", voice8Header->oneShotHiSamples);
+    IFF_printIndent(stdout, indentLevel, "repeatHiSamples = %u;\n", voice8Header->repeatHiSamples);
+    IFF_printIndent(stdout, indentLevel, "samplesPerHiCycle = %u;\n", voice8Header->samplesPerHiCycle);
+    IFF_printIndent(stdout, indentLevel, "samplesPerSec = %u;\n", voice8Header->samplesPerSec);
+    IFF_printIndent(stdout, indentLevel, "ctOctave = %u;\n", voice8Header->ctOctave);
+    IFF_printIndent(stdout, indentLevel, "sCompression = %u;\n", voice8Header->sCompression);
     IFF_printIndent(stdout, indentLevel, "volume = %d;\n", voice8Header->volume);
 }

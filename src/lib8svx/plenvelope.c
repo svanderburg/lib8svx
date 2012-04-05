@@ -113,6 +113,6 @@ void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLeve
     for(i = 0; i < plEnvelope->egPointLength; i++)
     {
 	_8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
-	IFF_printIndent(stdout, indentLevel, "{ duration = %d, dest = %d }\n", egPoint->duration, egPoint->dest);
+	IFF_printIndent(stdout, indentLevel, "{ duration = %u, dest = %d }\n", egPoint->duration, egPoint->dest);
     }
 }

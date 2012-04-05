@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	    
 	    if(voice8Header->oneShotHiSamples != SAMPLE_LENGTH)
 	    {
-		fprintf(stderr, "'VHDR'.oneShotHiSamples should be %d\n", SAMPLE_LENGTH);
+		fprintf(stderr, "'VHDR'.oneShotHiSamples should be %u\n", SAMPLE_LENGTH);
 		status = 1;
 	    }
 	    
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 	    
 	    if(voice8Header->samplesPerSec != SAMPLE_LENGTH)
 	    {
-		fprintf(stderr, "'VHDR'.samplesPerSec should be %d\n", SAMPLE_LENGTH);
+		fprintf(stderr, "'VHDR'.samplesPerSec should be %u\n", SAMPLE_LENGTH);
 		status = 1;
 	    }
 	    
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 	    
 	    if(voice8Header->sCompression != _8SVX_CMP_NONE)
 	    {
-		fprintf(stderr, "'VHDR'.sCompression should be %d\n", _8SVX_CMP_NONE);
+		fprintf(stderr, "'VHDR'.sCompression should be %u\n", _8SVX_CMP_NONE);
 		status = 1;
 	    }
 	    
