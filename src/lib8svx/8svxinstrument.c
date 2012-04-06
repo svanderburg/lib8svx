@@ -21,7 +21,6 @@
 
 #include "8svxinstrument.h"
 #include <stdlib.h>
-#include <libiff/util.h>
 #include <libiff/error.h>
 #include "8svx.h"
 
