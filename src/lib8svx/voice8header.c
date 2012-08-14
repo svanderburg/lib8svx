@@ -95,7 +95,7 @@ IFF_Chunk *_8SVX_readVoice8Header(FILE *file, const IFF_Long chunkSize)
 
 int _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)chunk;
+    const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
     
     if(!IFF_writeULong(file, voice8Header->oneShotHiSamples, CHUNKID, "oneShotHiSamples"))
 	return FALSE;
@@ -123,7 +123,7 @@ int _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk)
 
 int _8SVX_checkVoice8Header(const IFF_Chunk *chunk)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)chunk;
+    const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
     
     if(voice8Header->sCompression < _8SVX_CMP_NONE || voice8Header->sCompression > _8SVX_CMP_FIBDELTA)
     {
@@ -140,7 +140,7 @@ void _8SVX_freeVoice8Header(IFF_Chunk *chunk)
 
 void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)chunk;
+    const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
     
     IFF_printIndent(stdout, indentLevel, "oneShotHiSamples = %u;\n", voice8Header->oneShotHiSamples);
     IFF_printIndent(stdout, indentLevel, "repeatHiSamples = %u;\n", voice8Header->repeatHiSamples);
@@ -149,4 +149,33 @@ void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLe
     IFF_printIndent(stdout, indentLevel, "ctOctave = %u;\n", voice8Header->ctOctave);
     IFF_printIndent(stdout, indentLevel, "sCompression = %u;\n", voice8Header->sCompression);
     IFF_printIndent(stdout, indentLevel, "volume = %d;\n", voice8Header->volume);
+}
+
+int _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    const _8SVX_Voice8Header *voice8Header1 = (const _8SVX_Voice8Header*)chunk1;
+    const _8SVX_Voice8Header *voice8Header2 = (const _8SVX_Voice8Header*)chunk2;
+    
+    if(voice8Header1->oneShotHiSamples != voice8Header2->oneShotHiSamples)
+	return FALSE;
+
+    if(voice8Header1->repeatHiSamples != voice8Header2->repeatHiSamples)
+	return FALSE;
+    
+    if(voice8Header1->samplesPerHiCycle != voice8Header2->samplesPerHiCycle)
+	return FALSE;
+    
+    if(voice8Header1->samplesPerSec != voice8Header2->samplesPerSec)
+	return FALSE;
+    
+    if(voice8Header1->ctOctave != voice8Header2->ctOctave)
+	return FALSE;
+    
+    if(voice8Header1->sCompression != voice8Header2->sCompression)
+	return FALSE;
+    
+    if(voice8Header1->volume != voice8Header2->volume)
+	return FALSE;
+	
+    return TRUE;
 }

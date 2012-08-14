@@ -34,14 +34,14 @@
 #define _8SVX_NUM_OF_EXTENSION_CHUNKS 8
 
 static IFF_FormExtension _8svxFormExtension[] = {
-    {"(c) ", &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright},
-    {"ANNO", &_8SVX_readAnnotation, &_8SVX_writeAnnotation, &_8SVX_checkAnnotation, &_8SVX_freeAnnotation, &_8SVX_printAnnotation},
-    {"ATAK", &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl},
-    {"AUTH", &_8SVX_readAuthor, &_8SVX_writeAuthor, &_8SVX_checkAuthor, &_8SVX_freeAuthor, &_8SVX_printAuthor},
-    {"BODY", &_8SVX_readBody, &_8SVX_writeBody, &_8SVX_checkBody, &_8SVX_freeBody, &_8SVX_printBody},
-    {"NAME", &_8SVX_readName, &_8SVX_writeName, &_8SVX_checkName, &_8SVX_freeName, &_8SVX_printName},
-    {"RLSE", &_8SVX_readPlaybackEnvelope, &_8SVX_writePlaybackEnvelope, &_8SVX_checkPlaybackEnvelope, &_8SVX_freePlaybackEnvelope, &_8SVX_printPlaybackEnvelope},
-    {"VHDR", &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header}
+    {"(c) ", &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright, &_8SVX_compareCopyright},
+    {"ANNO", &_8SVX_readAnnotation, &_8SVX_writeAnnotation, &_8SVX_checkAnnotation, &_8SVX_freeAnnotation, &_8SVX_printAnnotation, &_8SVX_compareAnnotation},
+    {"ATAK", &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl, &_8SVX_compareVolumeControl},
+    {"AUTH", &_8SVX_readAuthor, &_8SVX_writeAuthor, &_8SVX_checkAuthor, &_8SVX_freeAuthor, &_8SVX_printAuthor, &_8SVX_compareAuthor},
+    {"BODY", &_8SVX_readBody, &_8SVX_writeBody, &_8SVX_checkBody, &_8SVX_freeBody, &_8SVX_printBody, &_8SVX_compareBody},
+    {"NAME", &_8SVX_readName, &_8SVX_writeName, &_8SVX_checkName, &_8SVX_freeName, &_8SVX_printName, &_8SVX_compareName},
+    {"RLSE", &_8SVX_readPlaybackEnvelope, &_8SVX_writePlaybackEnvelope, &_8SVX_checkPlaybackEnvelope, &_8SVX_freePlaybackEnvelope, &_8SVX_printPlaybackEnvelope, &_8SVX_comparePlaybackEnvelope},
+    {"VHDR", &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header, &_8SVX_compareVoice8Header}
 };
 
 static IFF_Extension extension[] = {
@@ -81,4 +81,9 @@ void _8SVX_free(IFF_Chunk *chunk)
 void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
     IFF_print(chunk, 0, extension, _8SVX_NUM_OF_FORM_TYPES);
+}
+
+int _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    return IFF_compare(chunk1, chunk2, extension, _8SVX_NUM_OF_FORM_TYPES);
 }

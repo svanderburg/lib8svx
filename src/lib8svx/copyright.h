@@ -40,4 +40,6 @@ void _8SVX_freeCopyright(IFF_Chunk *chunk);
 
 void _8SVX_printCopyright(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
+int _8SVX_compareCopyright(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
 #endif

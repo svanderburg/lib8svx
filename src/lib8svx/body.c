@@ -37,7 +37,7 @@ IFF_Chunk *_8SVX_readBody(FILE *file, const IFF_Long chunkSize)
 
 int _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk)
 {
-    return IFF_writeRawChunk(file, (IFF_RawChunk*)chunk);
+    return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
 }
 
 int _8SVX_checkBody(const IFF_Chunk *chunk)
@@ -61,7 +61,7 @@ void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel)
 	
     for(i = 0; i < body->chunkSize; i++)
     {
-	if(i > 0 && i % 10 == 0)
+	if((i > 0) && (i % 10) == 0)
 	{
 	    printf("\n");
 	    IFF_printIndent(stdout, indentLevel + 1, "");
@@ -74,4 +74,9 @@ void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel)
 	
     printf("\n");
     IFF_printIndent(stdout, indentLevel, ";\n");
+}
+
+int _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
 }

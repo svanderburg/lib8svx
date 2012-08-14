@@ -79,7 +79,7 @@ IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const char
 
 int _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk)
 {
-    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
+    const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     unsigned int i;
     
     for(i = 0; i < plEnvelope->egPointLength; i++)
@@ -107,7 +107,7 @@ void _8SVX_freePLEnvelope(IFF_Chunk *chunk)
 
 void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
-    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
+    const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     unsigned int i;
     
     for(i = 0; i < plEnvelope->egPointLength; i++)
@@ -115,4 +115,31 @@ void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLeve
 	_8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
 	IFF_printIndent(stdout, indentLevel, "{ duration = %u, dest = %d }\n", egPoint->duration, egPoint->dest);
     }
+}
+
+int _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    const _8SVX_PLEnvelope *plEnvelope1 = (const _8SVX_PLEnvelope*)chunk1;
+    const _8SVX_PLEnvelope *plEnvelope2 = (const _8SVX_PLEnvelope*)chunk2;
+    
+    if(plEnvelope1->egPointLength == plEnvelope2->egPointLength)
+    {
+	unsigned int i;
+	
+	for(i = 0; i < plEnvelope1->egPointLength; i++)
+	{
+	    _8SVX_EGPoint *egPoint1 = &plEnvelope1->egPoint[i];
+	    _8SVX_EGPoint *egPoint2 = &plEnvelope2->egPoint[i];
+	    
+	    if(egPoint1->duration != egPoint2->duration)
+		return FALSE;
+	
+	    if(egPoint1->dest != egPoint2->dest)
+		return FALSE;
+	}
+    }
+    else
+	return FALSE;
+    
+    return TRUE;
 }

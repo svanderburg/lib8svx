@@ -40,4 +40,6 @@ void _8SVX_freeAuthor(IFF_Chunk *chunk);
 
 void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
+int _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
 #endif

@@ -63,4 +63,6 @@ void _8SVX_freeVoice8Header(IFF_Chunk *chunk);
 
 void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
+int _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
 #endif

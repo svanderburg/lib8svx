@@ -57,3 +57,8 @@ void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int inde
 {
     _8SVX_printPLEnvelope(chunk, indentLevel);
 }
+
+int _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    return _8SVX_comparePLEnvelope(chunk1, chunk2);
+}

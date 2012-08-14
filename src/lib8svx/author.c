@@ -52,3 +52,8 @@ void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
     IFF_printText((IFF_RawChunk*)chunk, indentLevel);
 }
+
+int _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
+}

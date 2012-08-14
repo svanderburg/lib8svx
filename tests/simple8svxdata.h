@@ -19,27 +19,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef __8SVX_ANNOTATION_H
-#define __8SVX_ANNOTATION_H
+#ifndef __SIMPLE8SVXDATA_H
+#define __SIMPLE8SVXDATA_H
+#include <libiff/form.h>
 
-#include <stdio.h>
-#include <libiff/chunk.h>
-#include <libiff/rawchunk.h>
-
-typedef IFF_RawChunk _8SVX_Annotation;
-
-_8SVX_Annotation *_8SVX_createAnnotation(void);
-
-IFF_Chunk *_8SVX_readAnnotation(FILE *file, const IFF_Long chunkSize);
-
-int _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk);
-
-int _8SVX_checkAnnotation(const IFF_Chunk *chunk);
-
-void _8SVX_freeAnnotation(IFF_Chunk *chunk);
-
-void _8SVX_printAnnotation(const IFF_Chunk *chunk, const unsigned int indentLevel);
-
-int _8SVX_compareAnnotation(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Form *_8SVX_createTestForm(void);
 
 #endif

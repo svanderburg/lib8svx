@@ -35,7 +35,7 @@ IFF_Chunk *_8SVX_readAnnotation(FILE *file, const IFF_Long chunkSize)
 
 int _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk)
 {
-    return IFF_writeRawChunk(file, (IFF_RawChunk*)chunk);
+    return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
 }
 
 int _8SVX_checkAnnotation(const IFF_Chunk *chunk)
@@ -50,5 +50,10 @@ void _8SVX_freeAnnotation(IFF_Chunk *chunk)
 
 void _8SVX_printAnnotation(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
-    IFF_printText((IFF_RawChunk*)chunk, indentLevel);
+    IFF_printText((const IFF_RawChunk*)chunk, indentLevel);
+}
+
+int _8SVX_compareAnnotation(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+{
+    return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
 }

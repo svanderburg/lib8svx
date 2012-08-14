@@ -39,4 +39,6 @@ int _8SVX_check(const IFF_Chunk *chunk);
 
 void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
+int _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
 #endif

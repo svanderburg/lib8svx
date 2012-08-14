@@ -40,4 +40,6 @@ void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk);
 
 void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
+int _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
 #endif
