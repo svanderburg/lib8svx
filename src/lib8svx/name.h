@@ -26,6 +26,10 @@
 #include <libiff/chunk.h>
 #include <libiff/rawchunk.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef IFF_RawChunk _8SVX_Name;
 
 _8SVX_Name *_8SVX_createName(void);
@@ -41,5 +45,9 @@ void _8SVX_freeName(IFF_Chunk *chunk);
 void _8SVX_printName(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_compareName(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

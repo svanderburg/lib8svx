@@ -25,6 +25,10 @@
 #include <stdio.h>
 #include <libiff/chunk.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 IFF_Chunk *_8SVX_readFd(FILE *file);
 
 IFF_Chunk *_8SVX_read(const char *filename);
@@ -40,5 +44,9 @@ int _8SVX_check(const IFF_Chunk *chunk);
 void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

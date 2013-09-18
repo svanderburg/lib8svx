@@ -24,6 +24,10 @@
 
 #include "plenvelope.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef _8SVX_PLEnvelope _8SVX_PlaybackEnvelope;
 
 _8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope(void);
@@ -41,5 +45,9 @@ void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk);
 void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

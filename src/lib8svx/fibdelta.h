@@ -24,8 +24,16 @@
 
 #include "8svxinstrument.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void _8SVX_unpackFibonacciDelta(_8SVX_Instrument *instrument);
 
 void _8SVX_packFibonacciDelta(_8SVX_Instrument *instrument);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -29,6 +29,10 @@
 
 #define _8SVX_MAX_VOLUME 0x10000
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum
 {
     _8SVX_CMP_NONE = 0,
@@ -64,5 +68,9 @@ void _8SVX_freeVoice8Header(IFF_Chunk *chunk);
 void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

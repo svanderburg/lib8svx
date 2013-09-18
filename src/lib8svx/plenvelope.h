@@ -27,6 +27,10 @@
 #include <libiff/group.h>
 #include <libiff/chunk.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct
 {
     IFF_UWord duration;
@@ -61,5 +65,9 @@ void _8SVX_freePLEnvelope(IFF_Chunk *chunk);
 void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

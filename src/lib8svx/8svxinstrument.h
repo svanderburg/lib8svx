@@ -32,6 +32,10 @@
 #include "playbackenvelope.h"
 #include "body.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct
 {
     unsigned int sampleSize;
@@ -78,5 +82,9 @@ int _8SVX_checkInstrument(const _8SVX_Instrument *instrument);
 int _8SVX_checkInstruments(const IFF_Chunk *chunk, _8SVX_Instrument **instruments, const unsigned int instrumentsLength);
 
 void _8SVX_addAnnotationToInstrument(_8SVX_Instrument *instrument, _8SVX_Annotation *annotation);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

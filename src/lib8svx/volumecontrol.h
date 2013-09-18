@@ -24,6 +24,10 @@
 
 #include "plenvelope.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef _8SVX_PLEnvelope _8SVX_VolumeControl;
 
 _8SVX_VolumeControl *_8SVX_createVolumeControl(void);
@@ -41,5 +45,9 @@ void _8SVX_freeVolumeControl(IFF_Chunk *chunk);
 void _8SVX_printVolumeControl(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_compareVolumeControl(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

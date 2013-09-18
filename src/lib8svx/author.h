@@ -22,6 +22,10 @@
 #ifndef __8SVX_AUTHOR_H
 #define __8SVX_AUTHOR_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <libiff/chunk.h>
 #include <libiff/rawchunk.h>
@@ -41,5 +45,9 @@ void _8SVX_freeAuthor(IFF_Chunk *chunk);
 void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
 int _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
