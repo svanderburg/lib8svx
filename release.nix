@@ -39,6 +39,7 @@ let
           inherit version;
           src = tarball;
           buildInputs = [ pkgconfig libiff ];
+          CFLAGS = "-ansi -pedantic -Wall";
         }
       )) //
       (pkgs.lib.optionalAttrs (buildForAmiga)
