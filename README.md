@@ -39,7 +39,7 @@ This package can also be built with Visual C++ for Windows platforms. The
 solution file resides in `src/lib8svx.sln` that can be opened in Visual Studio
 to edit or build it. Alternatively, you can also use `MSBuild` to compile it:
 
-    $ MSBuild libilbm.sln
+    $ MSBuild lib8svx.sln
 
 To make any builds work you must have built `libiff` first. By default, the
 project file looks for the `libiff` folder that resides in the parent directory
@@ -48,7 +48,7 @@ of the current solution.
 You can also specify the location of the `libiff` includes and `libiff` libraries
 through property parameters:
 
-    $ MSBuild /p:libiffIncludePath:..\..\..\libiff\src /p:libiffLibPath:..\..\..\libiff\src\Debug libilbm.sln
+    $ MSBuild /p:libiffIncludePath:..\..\..\libiff\src /p:libiffLibPath:..\..\..\libiff\src\Debug lib8svx.sln
 
 The output is produced in the `Debug/` directory.
 
