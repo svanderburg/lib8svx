@@ -1,8 +1,9 @@
 { nixpkgs ? <nixpkgs>
 , systems ? [ "i686-linux" "x86_64-linux" ]
 , buildForAmiga ? false
+, buildForWindows ? false
 , amigaosenvPath ? <amigaosenv>
-, libiffJobset ? import ../libiff/release.nix { inherit nixpkgs systems officialRelease buildForAmiga; }
+, libiffJobset ? import ../libiff/release.nix { inherit nixpkgs systems officialRelease buildForAmiga buildForWindows; }
 , lib8svx ? {outPath = ./.; rev = 1234;}
 , officialRelease ? false
 }:
@@ -42,6 +43,24 @@ let
           CFLAGS = "-ansi -pedantic -Wall";
         }
       )) //
+      (pkgs.lib.optionalAttrs (buildForWindows) { i686-windows =
+         let
+           libiff = libiffJobset.build.i686-windows;
+         in
+         pkgs.dotnetenv.buildSolution {
+           name = "lib8svx";
+           src = ./.;
+           baseDir = "src";
+           slnFile = "lib8svx.sln";
+           preBuild = ''
+             export msBuildOpts="/p:libiffIncludePath=\"$(cygpath --windows ${libiff}/include)\" /p:libiffLibPath=\"$(cygpath --windows ${libiff})\""
+           '';
+           postInstall = ''
+             mkdir -p $out/include/lib8svx
+             cp -v lib8svx/*.h $out/include/lib8svx
+           '';
+         };
+        }) //
       (pkgs.lib.optionalAttrs (buildForAmiga)
         (let
           amigaosenv = import amigaosenvPath {
