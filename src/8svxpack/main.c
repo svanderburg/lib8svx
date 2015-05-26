@@ -35,129 +35,159 @@
 
 static void printUsage(const char *command)
 {
-    fprintf(stderr, "Usage:\n");
+    printf("The command `8svxpack' compresses or decompresses all the BODY chunks of all\n");
+    printf("8SVX forms in the given IFF file using the fibonacci delta algorithm. If no\n");
+    printf("IFF file is specified, it reads an IFF file from the standard input.\n\n");
+    
 #if _MSC_VER
-	fprintf(stderr, "%s {/c|/d} [/i file.IFF] [/o file.IFF]\n\n", command);
-	fprintf(stderr, "Options:\n");
-	fprintf(stderr, "/c    Compress the 8SVX instruments\n");
-	fprintf(stderr, "/d    Decompress the 8SVX instruments\n");
-	fprintf(stderr, "/?    Shows the usage of this command to the user\n");
+    printf("Usage: %s /c [OPTION] [/i file.IFF] [/o file.IFF]\n", command);
+    printf("  or: %s /d [OPTION] [/i file.IFF] [/o file.IFF]\n\n", command);
 #else
-    fprintf(stderr, "%s {-c|-d} [-i file.IFF] [-o file.IFF]\n\n", command);
-    fprintf(stderr, "Options:\n");
-    fprintf(stderr, "--compress, -c      Compress the 8SVX instruments\n");
-    fprintf(stderr, "--decompress, -d    Decompress the 8SVX instruments\n");
-    fprintf(stderr, "-h, --help          Shows the usage of this command to the user\n");
+    printf("Usage: %s -c [OPTION] [-i file.IFF] [-o file.IFF]\n", command);
+    printf("  or: %s -d [OPTION] [-i file.IFF] [-o file.IFF]\n\n", command);
 #endif
+
+    printf("Options:\n\n");
+    
+#if _MSC_VER
+    printf("  /c    Compress the 8SVX instruments\n");
+    printf("  /d    Decompress the 8SVX instruments\n");
+    printf("  /i    Specifies the input IFF file. If no input file is given,\n");
+    printf("        then data will be read from the standard input\n");
+    printf("  /o    Specifies the output IFF file. If no output file is\n");
+    printf("        given, then data will be written to the standard output\n");
+    printf("  /?    Shows the usage of this command to the user\n");
+    printf("  /v    Shows the version of this command to the user\n");
+#else
+    printf("  -c, --compress       Compress the 8SVX instruments\n");
+    printf("  -d, --decompress     Decompress the 8SVX instruments\n");
+    printf("  -i, --input-file     Specifies the input IFF file. If no input file is given,\n");
+    printf("                       then data will be read from the standard input\n");
+    printf("  -o, --output-file    Specifies the output IFF file. If no output file is\n");
+    printf("                       given, then data will be written to the standard output\n");
+    printf("  -h, --help           Shows the usage of this command to the user\n");
+    printf("  -v, --version        Shows the usage of this command to the user\n");
+#endif
+}
+
+static void printVersion(const char *command)
+{
+    printf("%s (" PACKAGE_NAME ") " PACKAGE_VERSION "\n\n", command);
+    printf("Copyright (C) 2012-2015 Sander van der Burg\n");
 }
 
 int main(int argc, char *argv[])
 {
-	char *inputFilename = NULL;
-	char *outputFilename = NULL;
-	int compress = FALSE;
+    char *inputFilename = NULL;
+    char *outputFilename = NULL;
+    int compress = FALSE;
 
 #if _MSC_VER
-	unsigned int optind = 1;
-	unsigned int i;
-	int inputFilenameFollows = FALSE;
-	int outputFilenameFollows = FALSE;
+    unsigned int optind = 1;
+    unsigned int i;
+    int inputFilenameFollows = FALSE;
+    int outputFilenameFollows = FALSE;
 
-	for (i = 1; i < argc; i++)
-	{
-		if (inputFilenameFollows)
-		{
-			inputFilename = argv[i];
-			inputFilenameFollows = FALSE;
-			optind++;
-		}
-		else if (outputFilenameFollows)
-		{
-			outputFilename = argv[i];
-			outputFilenameFollows = FALSE;
-			optind++;
-		}
-		else if (strcmp(argv[i], "/i") == 0)
-		{
-			inputFilenameFollows = TRUE;
-			optind++;
-		}
-		else if (strcmp(argv[i], "/o") == 0)
-		{
-			outputFilenameFollows = FALSE;
-			optind++;
-		}
-		else if (strcmp(argv[i], "/c") == 0)
-		{
-			compress = TRUE;
-			optind++;
-		}
-		else if (strcmp(argv[i], "/d") == 0)
-		{
-			compress = FALSE;
-			optind++;
-		}
-		else if (strcmp(argv[i], "/?") == 0)
-		{
-			printUsage(argv[0]);
-			return 0;
-		} 
-	} 
+    for (i = 1; i < argc; i++)
+    {
+        if (inputFilenameFollows)
+        {
+            inputFilename = argv[i];
+            inputFilenameFollows = FALSE;
+            optind++;
+        }
+        else if (outputFilenameFollows)
+        {
+            outputFilename = argv[i];
+            outputFilenameFollows = FALSE;
+            optind++;
+        }
+        else if (strcmp(argv[i], "/i") == 0)
+        {
+            inputFilenameFollows = TRUE;
+            optind++;
+        }
+        else if (strcmp(argv[i], "/o") == 0)
+        {
+            outputFilenameFollows = TRUE;
+            optind++;
+        }
+        else if (strcmp(argv[i], "/c") == 0)
+        {
+            compress = TRUE;
+            optind++;
+        }
+        else if (strcmp(argv[i], "/d") == 0)
+        {
+            compress = FALSE;
+            optind++;
+        }
+        else if (strcmp(argv[i], "/?") == 0)
+        {
+            printUsage(argv[0]);
+            return 0;
+        }
+        else if (strcmp(argv[i], "/v") == 0)
+        {
+            printVersion(argv[0]);
+            return 0;
+        }
+    }
 #else
     int c;
 #if HAVE_GETOPT_H == 1
     int option_index = 0;
     struct option long_options[] =
     {
-	{"compress", no_argument, 0, 'c'},
-	{"decompress", no_argument, 0, 'd'},
-	{"input-file", required_argument, 0, 'i'},
-	{"output-file", required_argument, 0, 'o'},
-	{"help", no_argument, 0, 'h'},
-	{0, 0, 0, 0}
+        {"compress", no_argument, 0, 'c'},
+        {"decompress", no_argument, 0, 'd'},
+        {"input-file", required_argument, 0, 'i'},
+        {"output-file", required_argument, 0, 'o'},
+        {"help", no_argument, 0, 'h'},
+        {"version", no_argument, 0, 'v'},
+        {0, 0, 0, 0}
     };
 #endif
     
     /* Parse command-line options */
     
 #if HAVE_GETOPT_H == 1
-    while((c = getopt_long(argc, argv, "i:o:cdh", long_options, &option_index)) != -1)
+    while((c = getopt_long(argc, argv, "i:o:cdhv", long_options, &option_index)) != -1)
 #else
-    while((c = getopt(argc, argv, "i:o:cdh")) != -1)
+    while((c = getopt(argc, argv, "i:o:cdhv")) != -1)
 #endif
     {
-	switch(c)
-	{
-	    case 'i':
-		inputFilename = optarg;
-		break;
-	
-	    case 'o':
-		outputFilename = optarg;
-		break;
-		
-	    case 'c':
-		compress = TRUE;
-		break;
-	
-	    case 'd':
-		compress = FALSE;
-		break;
-		
-	    case 'h':
-	    case '?':
-		printUsage(argv[0]);
-		return 0;
-	}
+        switch(c)
+        {
+            case 'i':
+                inputFilename = optarg;
+                break;
+            case 'o':
+                outputFilename = optarg;
+                break;
+            case 'c':
+                compress = TRUE;
+                break;
+            case 'd':
+                compress = FALSE;
+                break;
+            case 'h':
+            case '?':
+                printUsage(argv[0]);
+                return 0;
+            case 'v':
+                printVersion(argv[0]);
+                return 0;
+        }
     }
 #endif
     /* Check parameters */
 
     if(inputFilename == NULL && outputFilename == NULL)
     {
-	fprintf(stderr, "ERROR: At least an input file or output file must be specified!\n");
-	return 1;
+        fprintf(stderr, "ERROR: At least an input file or output file must be specified!\n");
+        return 1;
     }
     else
-	return pack(inputFilename, outputFilename, compress); /* Execute operation */
+        return pack(inputFilename, outputFilename, compress); /* Execute operation */
 }

@@ -23,9 +23,10 @@ let
       releaseTools.sourceTarball {
         name = "lib8svx-tarball";
         src = lib8svx;
+        dontBuild = false;
         inherit version officialRelease;
 
-        buildInputs = [ pkgconfig libiff ];
+        buildInputs = [ pkgconfig help2man libiff ];
       };
       
     build =
