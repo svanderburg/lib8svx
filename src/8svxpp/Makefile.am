@@ -1,4 +1,4 @@
-8svxpp.1:
+8svxpp.1: main.c
 	$(HELP2MAN) --output=$@ --no-info --name 'Displays a textual representation of an IFF/8SVX file on the standard output' --libtool ./8svxpp
 
 AM_CPPFLAGS = -DHAVE_GETOPT_H=$(HAVE_GETOPT_H)

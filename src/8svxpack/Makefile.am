@@ -1,4 +1,4 @@
-8svxpack.1:
+8svxpack.1: main.c
 	$(HELP2MAN) --output=$@ --no-info --name 'Compress or decompress 8SVX instruments inside an IFF file' --libtool ./8svxpack
 
 AM_CPPFLAGS = -DHAVE_GETOPT_H=$(HAVE_GETOPT_H)
