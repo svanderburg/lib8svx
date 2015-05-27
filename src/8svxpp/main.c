@@ -32,11 +32,11 @@
 
 static void printUsage(const char *command)
 {
+    printf("Usage: %s [OPTION] file.IFF\n\n", command);
+    
     printf("The command `8svxpp' displays a textual representation of a given IFF file\n");
     printf("containing 8SVX form chunks, which can be used for manual inspection. If no\n");
     printf("IFF file is specified, it reads an IFF file from the standard input.\n\n");
-
-    printf("Usage: %s [OPTION] file.IFF\n\n", command);
     
     printf("Options:\n\n");
 #if _MSC_VER
