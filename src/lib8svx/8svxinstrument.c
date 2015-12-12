@@ -52,7 +52,7 @@ _8SVX_Instrument **_8SVX_extractInstruments(IFF_Chunk *chunk, unsigned int *inst
 	    
 	    instrument->voice8Header = (_8SVX_Voice8Header*)IFF_getChunkFromForm(_8svxForm, "VHDR");
 	    instrument->name = (_8SVX_Name*)IFF_getChunkFromForm(_8svxForm, "NAME");
-	    instrument->copyright = (_8SVX_Name*)IFF_getChunkFromForm(_8svxForm, "(c) ");
+	    instrument->copyright = (_8SVX_Copyright*)IFF_getChunkFromForm(_8svxForm, "(c) ");
 	    instrument->author = (_8SVX_Author*)IFF_getChunkFromForm(_8svxForm, "AUTH");
 	    instrument->annotation = (_8SVX_Annotation**)IFF_getChunksFromForm(_8svxForm, "ANNO", &instrument->annotationLength);
 	    instrument->volumeControl = (_8SVX_VolumeControl*)IFF_getChunkFromForm(_8svxForm, "ATAK");
