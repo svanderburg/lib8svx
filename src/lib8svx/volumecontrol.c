@@ -30,7 +30,7 @@ _8SVX_VolumeControl *_8SVX_createVolumeControl()
 
 _8SVX_EGPoint *_8SVX_addToVolumeControl(_8SVX_VolumeControl *volumeControl)
 {
-    return _8SVX_addToVolumeControl((_8SVX_PLEnvelope*)volumeControl);
+    return _8SVX_addToPLEnvelope((_8SVX_PLEnvelope*)volumeControl);
 }
 
 IFF_Chunk *_8SVX_readVolumeControl(FILE *file, const IFF_Long chunkSize)

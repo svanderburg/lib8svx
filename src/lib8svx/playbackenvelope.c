@@ -30,7 +30,7 @@ _8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope()
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope)
 {
-    return _8SVX_addToPlaybackEnvelope((_8SVX_PLEnvelope*)playbackEnvelope);
+    return _8SVX_addToPLEnvelope((_8SVX_PLEnvelope*)playbackEnvelope);
 }
 
 IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize)
