@@ -12,6 +12,9 @@ IFF_Form *_8SVX_createTestForm()
     _8SVX_Copyright *copyright;
     _8SVX_Author *author;
     _8SVX_Annotation *annotation;
+    _8SVX_PlaybackEnvelope *playbackEnvelope;
+    _8SVX_VolumeControl *volumeControl;
+    _8SVX_EGPoint *egPoint;
     _8SVX_Body *body;
     
     IFF_Byte *bodyData;
@@ -50,6 +53,18 @@ IFF_Form *_8SVX_createTestForm()
     annotation = _8SVX_createAnnotation();
     IFF_setTextData((IFF_RawChunk*)annotation, "Annotation");
     
+    /* Define playback envelope */
+    playbackEnvelope = _8SVX_createPlaybackEnvelope();
+    egPoint = _8SVX_addToPlaybackEnvelope(playbackEnvelope);
+    egPoint->duration = 10;
+    egPoint->dest = 1;
+    
+    /* Define volume control */
+    volumeControl = _8SVX_createVolumeControl();
+    egPoint = _8SVX_addToVolumeControl(volumeControl);
+    egPoint->duration = 20;
+    egPoint->dest = 2;
+    
     /* Create body */
     
     body = _8SVX_createBody();
@@ -68,6 +83,8 @@ IFF_Form *_8SVX_createTestForm()
     instrument->name = name;
     instrument->copyright = copyright;
     instrument->author = author;
+    instrument->playbackEnvelope = playbackEnvelope;
+    instrument->volumeControl = volumeControl;
     instrument->body = body;
 
     _8SVX_addAnnotationToInstrument(instrument, annotation);
