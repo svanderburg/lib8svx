@@ -26,6 +26,7 @@ let
         dontBuild = false;
         inherit version officialRelease;
 
+        CFLAGS = "-ansi -pedantic -Wall";
         buildInputs = [ pkgconfig help2man libiff ];
       };
       

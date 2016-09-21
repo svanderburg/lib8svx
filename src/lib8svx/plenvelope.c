@@ -45,7 +45,7 @@ _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
     plEnvelope->egPoint = (_8SVX_EGPoint*)realloc(plEnvelope->egPoint, (plEnvelope->egPointLength + 1) * sizeof(_8SVX_EGPoint));
     egPoint = &plEnvelope->egPoint[plEnvelope->egPointLength];
     plEnvelope->egPointLength++;
-    plEnvelope->chunkSize += sizeof(_8SVX_EGPoint);
+    plEnvelope->chunkSize += sizeof(IFF_UWord) + sizeof(IFF_Long);
     
     return egPoint;
 }
