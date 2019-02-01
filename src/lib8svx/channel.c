@@ -72,7 +72,7 @@ int _8SVX_checkChannel(const IFF_Chunk *chunk)
         channel->playbackChannel != _8SVX_CHANNEL_LEFT &&
         channel->playbackChannel != _8SVX_CHANNEL_STEREO)
     {
-        IFF_error("Unsupported 'CHAN'.nPlanes value: %s\n", channel->playbackChannel);
+        IFF_error("Unsupported 'CHAN'.playbackChannel value: %s\n", channel->playbackChannel);
         return FALSE;
     }
 
