@@ -92,6 +92,7 @@
     <ClCompile Include="plenvelope.c" />
     <ClCompile Include="voice8header.c" />
     <ClCompile Include="volumecontrol.c" />
+    <ClCompile Include="channel.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="8svx.h" />
@@ -106,6 +107,7 @@
     <ClInclude Include="plenvelope.h" />
     <ClInclude Include="voice8header.h" />
     <ClInclude Include="volumecontrol.h" />
+    <ClInclude Include="channel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lib8svx.def" />
