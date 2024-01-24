@@ -25,35 +25,35 @@
 int _8SVX_prettyPrint(const char *filename, const int options)
 {
     IFF_Chunk *chunk;
-    
+
     if(filename == NULL)
-	chunk = _8SVX_readFd(stdin);
+        chunk = _8SVX_readFd(stdin);
     else
-	chunk = _8SVX_read(filename);
-    
+        chunk = _8SVX_read(filename);
+
     if(chunk == NULL)
     {
-	fprintf(stderr, "Cannot open 8SVX file!\n");
-	return 1;
+        fprintf(stderr, "Cannot open 8SVX file!\n");
+        return 1;
     }
     else
     {
-	int status;
-	
-	/* Check the file */
-	if((options & _8SVXPP_DISABLE_CHECK) || _8SVX_check(chunk))
-	{
-	    /* Print the file */
-	    _8SVX_print(chunk, 0); 
-	    
-	    status = 0;
-	}
-	else
-	    status = 1;
-	
-	/* Free the chunk structure */
-	_8SVX_free(chunk);
-	
-	return status;
+        int status;
+
+        /* Check the file */
+        if((options & _8SVXPP_DISABLE_CHECK) || _8SVX_check(chunk))
+        {
+            /* Print the file */
+            _8SVX_print(chunk, 0); 
+
+            status = 0;
+        }
+        else
+            status = 1;
+
+        /* Free the chunk structure */
+        _8SVX_free(chunk);
+
+        return status;
     }
 }

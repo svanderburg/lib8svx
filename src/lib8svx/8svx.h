@@ -33,17 +33,17 @@ IFF_Chunk *_8SVX_readFd(FILE *file);
 
 IFF_Chunk *_8SVX_read(const char *filename);
 
-int _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_write(const char *filename, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_write(const char *filename, const IFF_Chunk *chunk);
 
 void _8SVX_free(IFF_Chunk *chunk);
 
-int _8SVX_check(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_check(const IFF_Chunk *chunk);
 
 void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

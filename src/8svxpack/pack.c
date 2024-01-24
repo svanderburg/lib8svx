@@ -29,70 +29,70 @@
 int pack(const char *inputFilename, const char *outputFilename, const int compress)
 {
     IFF_Chunk *chunk;
-    
+
     if(inputFilename == NULL)
-	chunk = _8SVX_readFd(stdin);
+        chunk = _8SVX_readFd(stdin);
     else
-	chunk = _8SVX_read(inputFilename);
-    
+        chunk = _8SVX_read(inputFilename);
+
     if(chunk == NULL)
     {
-	fprintf(stderr, "Error parsing 8SVX file!\n");
-	return 1;
+        fprintf(stderr, "Error parsing 8SVX file!\n");
+        return 1;
     }
     else
     {
-	unsigned int instrumentsLength;
-	_8SVX_Instrument **instruments = _8SVX_extractInstruments(chunk, &instrumentsLength);
-	int status = 0;
-	
-	if(!_8SVX_checkInstruments(chunk, instruments, instrumentsLength))
-	{
-	    fprintf(stderr, "Invalid 8SVX file!\n");
-	    status = 1;
-	}
-	else if(instrumentsLength == 0)
-	{
-	    fprintf(stderr, "No 8SVX instruments found in IFF file!\n");
-	    status = 1;
-	}
-	else
-	{
-	    unsigned int i;
-	    
-	    for(i = 0; i < instrumentsLength; i++)
-	    {
-		_8SVX_Instrument *instrument = instruments[i];
-		
-		if(compress)
-		    _8SVX_packFibonacciDelta(instrument);
-		else
-		    _8SVX_unpackFibonacciDelta(instrument);
-	    }
-	    
-	    if(outputFilename == NULL)
-	    {
-		if(!_8SVX_writeFd(stdout, chunk))
-		{
-		    fprintf(stderr, "Error writing 8SVX file!\n");
-		    status = 1;
-		}
-	    }
-	    else
-	    {
-		if(!_8SVX_write(outputFilename, chunk))
-		{
-		    fprintf(stderr, "Error writing 8SVX file!\n");
-		    status = 1;
-		}
-	    }
-	    
-	    _8SVX_freeInstruments(instruments, instrumentsLength);
-	}
-	
-	_8SVX_free(chunk);
-	
-	/* Everything has succeeded */
-	return status;
+        unsigned int instrumentsLength;
+        _8SVX_Instrument **instruments = _8SVX_extractInstruments(chunk, &instrumentsLength);
+        int status = 0;
+
+        if(!_8SVX_checkInstruments(chunk, instruments, instrumentsLength))
+        {
+            fprintf(stderr, "Invalid 8SVX file!\n");
+            status = 1;
+        }
+        else if(instrumentsLength == 0)
+        {
+            fprintf(stderr, "No 8SVX instruments found in IFF file!\n");
+            status = 1;
+        }
+        else
+        {
+            unsigned int i;
+
+            for(i = 0; i < instrumentsLength; i++)
+            {
+                _8SVX_Instrument *instrument = instruments[i];
+
+                if(compress)
+                    _8SVX_packFibonacciDelta(instrument);
+                else
+                    _8SVX_unpackFibonacciDelta(instrument);
+            }
+
+            if(outputFilename == NULL)
+            {
+                if(!_8SVX_writeFd(stdout, chunk))
+                {
+                    fprintf(stderr, "Error writing 8SVX file!\n");
+                    status = 1;
+                }
+            }
+            else
+            {
+                if(!_8SVX_write(outputFilename, chunk))
+                {
+                    fprintf(stderr, "Error writing 8SVX file!\n");
+                    status = 1;
+                }
+            }
+
+            _8SVX_freeInstruments(instruments, instrumentsLength);
+        }
+
+        _8SVX_free(chunk);
+
+        /* Everything has succeeded */
+        return status;
     }
 }

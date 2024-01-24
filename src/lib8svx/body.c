@@ -35,12 +35,12 @@ IFF_Chunk *_8SVX_readBody(FILE *file, const IFF_Long chunkSize)
     return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
 }
 
-int _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk)
 {
     return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
 }
 
-int _8SVX_checkBody(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkBody(const IFF_Chunk *chunk)
 {
     return TRUE;
 }
@@ -55,28 +55,28 @@ void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel)
     _8SVX_Body *body = (_8SVX_Body*)chunk;
     unsigned int i;
     IFF_Byte byte;
-	
+
     IFF_printIndent(stdout, indentLevel, "values = \n");
     IFF_printIndent(stdout, indentLevel + 1, "");
-	
+
     for(i = 0; i < body->chunkSize; i++)
     {
-	if((i > 0) && (i % 10) == 0)
-	{
-	    printf("\n");
-	    IFF_printIndent(stdout, indentLevel + 1, "");
-	}
-	    
-	byte = body->chunkData[i];
-	    
-	printf("%d ", byte);
+        if((i > 0) && (i % 10) == 0)
+        {
+            printf("\n");
+            IFF_printIndent(stdout, indentLevel + 1, "");
+        }
+
+        byte = body->chunkData[i];
+
+        printf("%d ", byte);
     }
-	
+
     printf("\n");
     IFF_printIndent(stdout, indentLevel, ";\n");
 }
 
-int _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
 }

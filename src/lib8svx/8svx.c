@@ -58,17 +58,17 @@ IFF_Chunk *_8SVX_readFd(FILE *file)
     return IFF_readFd(file, extension, _8SVX_NUM_OF_FORM_TYPES);
 }
 
-int _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk)
 {
     return IFF_writeFd(file, chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
 }
 
-int _8SVX_write(const char *filename, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_write(const char *filename, const IFF_Chunk *chunk)
 {
     return IFF_write(filename, chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
 }
 
-int _8SVX_check(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_check(const IFF_Chunk *chunk)
 {
     return IFF_check(chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
 }
@@ -83,7 +83,7 @@ void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel)
     IFF_print(chunk, 0, extension, _8SVX_NUM_OF_FORM_TYPES);
 }
 
-int _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     return IFF_compare(chunk1, chunk2, extension, _8SVX_NUM_OF_FORM_TYPES);
 }

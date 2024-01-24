@@ -28,75 +28,75 @@
 _8SVX_PLEnvelope *_8SVX_createPLEnvelope(const char *chunkId)
 {
     _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_allocateChunk(chunkId, sizeof(_8SVX_PLEnvelope));
-    
+
     if(plEnvelope != NULL)
     {
-	plEnvelope->egPointLength = 0;
-	plEnvelope->egPoint = NULL;
+        plEnvelope->egPointLength = 0;
+        plEnvelope->egPoint = NULL;
     }
-    
+
     return plEnvelope;
 }
 
 _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
 {
     _8SVX_EGPoint *egPoint;
-    
+
     plEnvelope->egPoint = (_8SVX_EGPoint*)realloc(plEnvelope->egPoint, (plEnvelope->egPointLength + 1) * sizeof(_8SVX_EGPoint));
     egPoint = &plEnvelope->egPoint[plEnvelope->egPointLength];
     plEnvelope->egPointLength++;
     plEnvelope->chunkSize += sizeof(IFF_UWord) + sizeof(IFF_Long);
-    
+
     return egPoint;
 }
 
 IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const char *chunkId)
 {
     _8SVX_PLEnvelope *plEnvelope = _8SVX_createPLEnvelope(chunkId);
-    
+
     if(plEnvelope != NULL)
     {
-	while(plEnvelope->chunkSize < chunkSize)
-	{
-	    _8SVX_EGPoint *egPoint = _8SVX_addToPLEnvelope(plEnvelope);
-	    
-	    if(!IFF_readUWord(file, &egPoint->duration, chunkId, "duration"))
-	    {
-		free(egPoint);
-		_8SVX_free((IFF_Chunk*)plEnvelope);
-	    }
-	    
-	    if(!IFF_readLong(file, &egPoint->dest, chunkId, "dest"))
-	    {
-		free(egPoint);
-		_8SVX_free((IFF_Chunk*)plEnvelope);
-	    }
-	}
+        while(plEnvelope->chunkSize < chunkSize)
+        {
+            _8SVX_EGPoint *egPoint = _8SVX_addToPLEnvelope(plEnvelope);
+
+            if(!IFF_readUWord(file, &egPoint->duration, chunkId, "duration"))
+            {
+                free(egPoint);
+                _8SVX_free((IFF_Chunk*)plEnvelope);
+            }
+
+            if(!IFF_readLong(file, &egPoint->dest, chunkId, "dest"))
+            {
+                free(egPoint);
+                _8SVX_free((IFF_Chunk*)plEnvelope);
+            }
+        }
     }
-    
+
     return (IFF_Chunk*)plEnvelope;
 }
 
-int _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk)
 {
     const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     unsigned int i;
-    
+
     for(i = 0; i < plEnvelope->egPointLength; i++)
     {
-	_8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
-	
-	if(!IFF_writeUWord(file, egPoint->duration, plEnvelope->chunkId, "duration"))
-	    return FALSE;
-	
-	if(!IFF_writeLong(file, egPoint->dest, plEnvelope->chunkId, "dest"))
-	    return FALSE;
+        _8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
+
+        if(!IFF_writeUWord(file, egPoint->duration, plEnvelope->chunkId, "duration"))
+            return FALSE;
+
+        if(!IFF_writeLong(file, egPoint->dest, plEnvelope->chunkId, "dest"))
+            return FALSE;
     }
-    
+
     return TRUE;
 }
 
-int _8SVX_checkPLEnvelope(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk)
 {
     return TRUE;
 }
@@ -109,37 +109,37 @@ void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLeve
 {
     const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     unsigned int i;
-    
+
     for(i = 0; i < plEnvelope->egPointLength; i++)
     {
-	_8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
-	IFF_printIndent(stdout, indentLevel, "{ duration = %u, dest = %d }\n", egPoint->duration, egPoint->dest);
+        _8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
+        IFF_printIndent(stdout, indentLevel, "{ duration = %u, dest = %d }\n", egPoint->duration, egPoint->dest);
     }
 }
 
-int _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     const _8SVX_PLEnvelope *plEnvelope1 = (const _8SVX_PLEnvelope*)chunk1;
     const _8SVX_PLEnvelope *plEnvelope2 = (const _8SVX_PLEnvelope*)chunk2;
-    
+
     if(plEnvelope1->egPointLength == plEnvelope2->egPointLength)
     {
-	unsigned int i;
-	
-	for(i = 0; i < plEnvelope1->egPointLength; i++)
-	{
-	    _8SVX_EGPoint *egPoint1 = &plEnvelope1->egPoint[i];
-	    _8SVX_EGPoint *egPoint2 = &plEnvelope2->egPoint[i];
-	    
-	    if(egPoint1->duration != egPoint2->duration)
-		return FALSE;
-	
-	    if(egPoint1->dest != egPoint2->dest)
-		return FALSE;
-	}
+        unsigned int i;
+
+        for(i = 0; i < plEnvelope1->egPointLength; i++)
+        {
+            _8SVX_EGPoint *egPoint1 = &plEnvelope1->egPoint[i];
+            _8SVX_EGPoint *egPoint2 = &plEnvelope2->egPoint[i];
+
+            if(egPoint1->duration != egPoint2->duration)
+                return FALSE;
+
+            if(egPoint1->dest != egPoint2->dest)
+                return FALSE;
+        }
     }
     else
-	return FALSE;
-    
+        return FALSE;
+
     return TRUE;
 }

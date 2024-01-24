@@ -39,7 +39,7 @@ extern "C" {
 typedef struct
 {
     unsigned int sampleSize;
-    
+
     IFF_Byte *body;
 }
 _8SVX_Sample;
@@ -47,20 +47,20 @@ _8SVX_Sample;
 typedef struct
 {
     _8SVX_Voice8Header *voice8Header;
-    
+
     _8SVX_Name *name;
-    
+
     _8SVX_Copyright *copyright;
-    
+
     _8SVX_Author *author;
-    
+
     unsigned int annotationLength;
     _8SVX_Annotation **annotation;
-    
+
     _8SVX_VolumeControl *volumeControl;
-    
+
     _8SVX_PlaybackEnvelope *playbackEnvelope;
-    
+
     _8SVX_Body *body;
 }
 _8SVX_Instrument;
@@ -77,9 +77,9 @@ void _8SVX_freeInstrument(_8SVX_Instrument *instrument);
 
 void _8SVX_freeInstruments(_8SVX_Instrument **instruments, const unsigned int instrumentsLength);
 
-int _8SVX_checkInstrument(const _8SVX_Instrument *instrument);
+IFF_Bool _8SVX_checkInstrument(const _8SVX_Instrument *instrument);
 
-int _8SVX_checkInstruments(const IFF_Chunk *chunk, _8SVX_Instrument **instruments, const unsigned int instrumentsLength);
+IFF_Bool _8SVX_checkInstruments(const IFF_Chunk *chunk, _8SVX_Instrument **instruments, const unsigned int instrumentsLength);
 
 void _8SVX_addAnnotationToInstrument(_8SVX_Instrument *instrument, _8SVX_Annotation *annotation);
 

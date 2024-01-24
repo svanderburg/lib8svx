@@ -36,15 +36,15 @@ _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvel
 
 IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize);
 
-int _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk);
 
 void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk);
 
 void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

@@ -43,10 +43,10 @@ _8SVX_Compression;
 typedef struct
 {
     IFF_Group *parent;
-    
+
     IFF_ID chunkId;
     IFF_Long chunkSize;
-    
+
     IFF_ULong oneShotHiSamples, repeatHiSamples, samplesPerHiCycle;
     IFF_UWord samplesPerSec;
     IFF_UByte ctOctave;
@@ -59,15 +59,15 @@ _8SVX_Voice8Header *_8SVX_createVoice8Header(void);
 
 IFF_Chunk *_8SVX_readVoice8Header(FILE *file, const IFF_Long chunkSize);
 
-int _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkVoice8Header(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk);
 
 void _8SVX_freeVoice8Header(IFF_Chunk *chunk);
 
 void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

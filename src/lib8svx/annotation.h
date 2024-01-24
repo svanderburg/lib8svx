@@ -36,15 +36,15 @@ _8SVX_Annotation *_8SVX_createAnnotation(void);
 
 IFF_Chunk *_8SVX_readAnnotation(FILE *file, const IFF_Long chunkSize);
 
-int _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkAnnotation(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkAnnotation(const IFF_Chunk *chunk);
 
 void _8SVX_freeAnnotation(IFF_Chunk *chunk);
 
 void _8SVX_printAnnotation(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_compareAnnotation(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compareAnnotation(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

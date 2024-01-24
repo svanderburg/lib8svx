@@ -41,10 +41,10 @@ _8SVX_EGPoint;
 typedef struct
 {
     IFF_Group *parent;
-    
+
     IFF_ID chunkId;
     IFF_Long chunkSize;
-    
+
     unsigned int egPointLength;
     _8SVX_EGPoint *egPoint;
 }
@@ -56,15 +56,15 @@ _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope);
 
 IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const char *chunkId);
 
-int _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkPLEnvelope(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk);
 
 void _8SVX_freePLEnvelope(IFF_Chunk *chunk);
 
 void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

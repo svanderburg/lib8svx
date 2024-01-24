@@ -26,9 +26,11 @@ Installation on Unix-like systems
 Compilation and installation of this library on Unix-like systems is straight
 forward, by using the standard GNU autotools build instructions:
 
-    $ ./configure
-    $ make
-    $ make install
+```bash
+$ ./configure
+$ make
+$ make install
+```
 
 More details about the installation process can be found in the `INSTALL` file
 included in this package.
@@ -39,7 +41,9 @@ This package can also be built with Visual C++ for Windows platforms. The
 solution file resides in `src/lib8svx.sln` that can be opened in Visual Studio
 to edit or build it. Alternatively, you can also use `MSBuild` to compile it:
 
-    $ MSBuild lib8svx.sln
+```
+$ MSBuild lib8svx.sln
+```
 
 To make any builds work you must have built `libiff` first. By default, the
 project file looks for the `libiff` folder that resides in the parent directory
@@ -48,7 +52,9 @@ of the current solution.
 You can also specify the location of the `libiff` includes and `libiff` libraries
 through property parameters:
 
-    $ MSBuild /p:libiffIncludePath:..\..\..\libiff\src /p:libiffLibPath:..\..\..\libiff\src\Debug lib8svx.sln
+```
+$ MSBuild /p:libiffIncludePath:..\..\..\libiff\src /p:libiffLibPath:..\..\..\libiff\src\Debug lib8svx.sln
+```
 
 The output is produced in the `Debug/` directory.
 
@@ -91,9 +97,9 @@ int main(int argc, char *argv[])
     unsigned int instrumentsLength;
     IFF_Chunk *chunk = _8SVX_read("input.8SVX");
     _8SVX_Instrument **instrument = _8SVX_extractInstruments(chunk, &instrumentsLength);
-    
+
     /* Retrieve an instrument from the array and access its properties here */
-    
+
     return 0;
 }
 ```
@@ -110,11 +116,11 @@ instrument with a voice 8 header chunk:
 int main(int argc, char *argv[])
 {
     _8SVX_Instrument *instrument = _8SVX_createInstrument();
-    
+
     _8SVX_Voice8Header *voice8Header = _8SVX_createVoice8Header();
-    
+
     /* Create voice 8 header properties */
-    
+
     voice8Header->oneShotHiSamples = SAMPLE_LENGTH;
     voice8Header->repeatHiSamples = 0;
     voice8Header->samplesPerHiCycle = 0;
@@ -122,10 +128,10 @@ int main(int argc, char *argv[])
     voice8Header->ctOctave = 1;
     voice8Header->sCompression = _8SVX_CMP_NONE;
     voice8Header->volume = _8SVX_MAX_VOLUME;
-    
+
     /* Attach voice 8 header to the instrument */
     instrument->voice8Header = voice8Header;
-    
+
     return 0;
 }
 ```
@@ -149,21 +155,21 @@ int main(int argc, char *argv[])
     _8SVX_Instrument **instruments;
     unsigned int i, instrumentsLength, samplesLength;
     _8SVX_Sample *samples;
-    
+
     /* Open and extract 8SVX instruments here */
-    
+
     for(i = 0; i < instrumentsLength; i++)
     {
         _8SVX_Instrument *instrument = instruments[i];
         _8SVX_Voice8Header *voice8Header = instrument->voice8Header; /* Struct representing voice 8 header properties */
         _8SVX_Copyright *copyright = instrument->copyright; /* Struct containing copyright information */
         _8SVX_Body *body = instrument->body; /* Body chunk containing compressed or uncompressed sample data */
-        
+
         /* Retrieve more properties here */
-        
+
         samples = _8SVX_extractSamples(instrument, &samplesLength); /* Extract samples for each instrument octave */
     }
-    
+
     return 0;
 }
 ```
@@ -182,11 +188,11 @@ int main(int argc, char *argv[])
 {
     _8SVX_Instrument *instrument;
     IFF_Form *form;
-    
+
     /* Create a 8SVX instrument here */
-    
+
     form = _8SVX_convertInstrumentToForm(instrument);
-    
+
     if(_8SVX_write("output.8SVX", (IFF_Chunk*)form))
         return 0; /* File has been successfully written */
     else
@@ -234,12 +240,12 @@ the `_8SVX_unpackFibonacciDelta()` function.
 int main(int argc, char *argv[])
 {
     _8SVX_Instrument *instrument;
-    
+
     /* Create or open a 8SVX file here */
-    
+
     _8SVX_packFibonacciDelta(instrument); /* Instrument body is now fibonacci delta compressed */
     _8SVX_unpackFibonacciDelta(instrument); /* Instrument body is now uncompressed */
-    
+
     return 0;
 }
 ```

@@ -38,12 +38,12 @@ IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize)
     return _8SVX_readPLEnvelope(file, chunkSize, CHUNKID);
 }
 
-int _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk)
 {
     return _8SVX_writePLEnvelope(file, chunk);
 }
 
-int _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk)
 {
     return _8SVX_checkPLEnvelope(chunk);
 }
@@ -58,7 +58,7 @@ void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int inde
     _8SVX_printPLEnvelope(chunk, indentLevel);
 }
 
-int _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     return _8SVX_comparePLEnvelope(chunk1, chunk2);
 }

@@ -34,10 +34,10 @@ extern "C" {
 typedef struct
 {
     IFF_Group *parent;
-    
+
     IFF_ID chunkId;
     IFF_Long chunkSize;
-    
+
     IFF_Byte *chunkData;
 }
 _8SVX_Body;
@@ -46,15 +46,15 @@ _8SVX_Body *_8SVX_createBody(void);
 
 IFF_Chunk *_8SVX_readBody(FILE *file, const IFF_Long chunkSize);
 
-int _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkBody(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkBody(const IFF_Chunk *chunk);
 
 void _8SVX_freeBody(IFF_Chunk *chunk);
 
 void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

@@ -33,12 +33,12 @@ IFF_Chunk *_8SVX_readName(FILE *file, const IFF_Long chunkSize)
     return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
 }
 
-int _8SVX_writeName(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk)
 {
     return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
 }
 
-int _8SVX_checkName(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkName(const IFF_Chunk *chunk)
 {
     return TRUE;
 }
@@ -53,7 +53,7 @@ void _8SVX_printName(const IFF_Chunk *chunk, const unsigned int indentLevel)
     IFF_printText((const IFF_RawChunk*)chunk, indentLevel);
 }
 
-int _8SVX_compareName(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareName(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
 }

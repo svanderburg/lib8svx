@@ -36,15 +36,15 @@ _8SVX_Copyright *_8SVX_createCopyright(void);
 
 IFF_Chunk *_8SVX_readCopyright(FILE *file, const IFF_Long chunkSize);
 
-int _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk);
 
-int _8SVX_checkCopyright(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkCopyright(const IFF_Chunk *chunk);
 
 void _8SVX_freeCopyright(IFF_Chunk *chunk);
 
 void _8SVX_printCopyright(const IFF_Chunk *chunk, const unsigned int indentLevel);
 
-int _8SVX_compareCopyright(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compareCopyright(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
 
 #ifdef __cplusplus
 }

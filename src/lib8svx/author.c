@@ -33,12 +33,12 @@ IFF_Chunk *_8SVX_readAuthor(FILE *file, const IFF_Long chunkSize)
     return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
 }
 
-int _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk)
 {
     return IFF_writeRawChunk(file, (IFF_RawChunk*)chunk);
 }
 
-int _8SVX_checkAuthor(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkAuthor(const IFF_Chunk *chunk)
 {
     return TRUE;
 }
@@ -53,7 +53,7 @@ void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel)
     IFF_printText((IFF_RawChunk*)chunk, indentLevel);
 }
 
-int _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
     return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
 }
