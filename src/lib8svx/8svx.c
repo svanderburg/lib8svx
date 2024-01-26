@@ -29,9 +29,10 @@
 #include "body.h"
 #include "name.h"
 #include "voice8header.h"
+#include "channel.h"
 
 #define _8SVX_NUM_OF_FORM_TYPES 1
-#define _8SVX_NUM_OF_EXTENSION_CHUNKS 8
+#define _8SVX_NUM_OF_EXTENSION_CHUNKS 9
 
 static IFF_FormExtension _8svxFormExtension[] = {
     {"(c) ", &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright, &_8SVX_compareCopyright},
@@ -39,6 +40,7 @@ static IFF_FormExtension _8svxFormExtension[] = {
     {"ATAK", &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl, &_8SVX_compareVolumeControl},
     {"AUTH", &_8SVX_readAuthor, &_8SVX_writeAuthor, &_8SVX_checkAuthor, &_8SVX_freeAuthor, &_8SVX_printAuthor, &_8SVX_compareAuthor},
     {"BODY", &_8SVX_readBody, &_8SVX_writeBody, &_8SVX_checkBody, &_8SVX_freeBody, &_8SVX_printBody, &_8SVX_compareBody},
+    {"CHAN", &_8SVX_readChannel, &_8SVX_writeChannel, &_8SVX_checkChannel, &_8SVX_freeChannel, &_8SVX_printChannel, &_8SVX_compareChannel},
     {"NAME", &_8SVX_readName, &_8SVX_writeName, &_8SVX_checkName, &_8SVX_freeName, &_8SVX_printName, &_8SVX_compareName},
     {"RLSE", &_8SVX_readPlaybackEnvelope, &_8SVX_writePlaybackEnvelope, &_8SVX_checkPlaybackEnvelope, &_8SVX_freePlaybackEnvelope, &_8SVX_printPlaybackEnvelope, &_8SVX_comparePlaybackEnvelope},
     {"VHDR", &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header, &_8SVX_compareVoice8Header}

@@ -85,3 +85,10 @@ EXPORTS
 	_8SVX_freeVolumeControl         @83
 	_8SVX_printVolumeControl        @84
 	_8SVX_compareVolumeControl      @85
+	_8SVX_createChannel             @86
+	_8SVX_readChannel               @87
+	_8SVX_writeChannel              @88
+	_8SVX_checkChannel              @89
+	_8SVX_freeChannel               @90
+	_8SVX_printChannel              @91
+	_8SVX_compareChannel            @92
