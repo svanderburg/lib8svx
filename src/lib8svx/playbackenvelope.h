@@ -23,6 +23,9 @@
 #define __8SVX_PLAYBACK_ENVELOPE
 
 #include "plenvelope.h"
+#include <libiff/id.h>
+
+#define _8SVX_ID_RLSE IFF_MAKEID('R', 'L', 'S', 'E')
 
 #ifdef __cplusplus
 extern "C" {

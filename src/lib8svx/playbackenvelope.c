@@ -21,11 +21,9 @@
 
 #include "playbackenvelope.h"
 
-#define CHUNKID "RLSE"
-
 _8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope()
 {
-    return (_8SVX_PlaybackEnvelope*)_8SVX_createPLEnvelope(CHUNKID);
+    return (_8SVX_PlaybackEnvelope*)_8SVX_createPLEnvelope(_8SVX_ID_RLSE);
 }
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope)
@@ -35,7 +33,7 @@ _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvel
 
 IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize)
 {
-    return _8SVX_readPLEnvelope(file, chunkSize, CHUNKID);
+    return _8SVX_readPLEnvelope(file, chunkSize, _8SVX_ID_RLSE);
 }
 
 IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk)

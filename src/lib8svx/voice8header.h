@@ -26,8 +26,11 @@
 #include <libiff/ifftypes.h>
 #include <libiff/group.h>
 #include <libiff/chunk.h>
+#include <libiff/id.h>
 
 #define _8SVX_MAX_VOLUME 0x10000
+
+#define _8SVX_ID_VHDR IFF_MAKEID('V', 'H', 'D', 'R')
 
 #ifdef __cplusplus
 extern "C" {

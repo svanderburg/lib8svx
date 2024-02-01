@@ -25,11 +25,9 @@
 #include <libiff/error.h>
 #include "8svx.h"
 
-#define CHUNKID "VHDR"
-
 _8SVX_Voice8Header *_8SVX_createVoice8Header(void)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_allocateChunk(CHUNKID, sizeof(_8SVX_Voice8Header));
+    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_allocateChunk(_8SVX_ID_VHDR, sizeof(_8SVX_Voice8Header));
 
     if(voice8Header != NULL)
         voice8Header->chunkSize = 3 * sizeof(IFF_ULong) + sizeof(IFF_UWord) + sizeof(IFF_UByte) + sizeof(IFF_UByte) + sizeof(IFF_Long);
@@ -45,37 +43,37 @@ IFF_Chunk *_8SVX_readVoice8Header(FILE *file, const IFF_Long chunkSize)
     {
         IFF_UByte byte;
 
-        if(!IFF_readULong(file, &voice8Header->oneShotHiSamples, CHUNKID, "oneShotHiSamples"))
+        if(!IFF_readULong(file, &voice8Header->oneShotHiSamples, _8SVX_ID_VHDR, "oneShotHiSamples"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
         }
 
-        if(!IFF_readULong(file, &voice8Header->repeatHiSamples, CHUNKID, "repeatHiSamples"))
+        if(!IFF_readULong(file, &voice8Header->repeatHiSamples, _8SVX_ID_VHDR, "repeatHiSamples"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
         }
 
-        if(!IFF_readULong(file, &voice8Header->samplesPerHiCycle, CHUNKID, "samplesPerHiCycle"))
+        if(!IFF_readULong(file, &voice8Header->samplesPerHiCycle, _8SVX_ID_VHDR, "samplesPerHiCycle"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
         }
 
-        if(!IFF_readUWord(file, &voice8Header->samplesPerSec, CHUNKID, "samplesPerSec"))
+        if(!IFF_readUWord(file, &voice8Header->samplesPerSec, _8SVX_ID_VHDR, "samplesPerSec"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
         }
 
-        if(!IFF_readUByte(file, &voice8Header->ctOctave, CHUNKID, "ctOctave"))
+        if(!IFF_readUByte(file, &voice8Header->ctOctave, _8SVX_ID_VHDR, "ctOctave"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
         }
 
-        if(!IFF_readUByte(file, &byte, CHUNKID, "sCompression"))
+        if(!IFF_readUByte(file, &byte, _8SVX_ID_VHDR, "sCompression"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
@@ -83,7 +81,7 @@ IFF_Chunk *_8SVX_readVoice8Header(FILE *file, const IFF_Long chunkSize)
 
         voice8Header->sCompression = byte;
 
-        if(!IFF_readLong(file, &voice8Header->volume, CHUNKID, "volume"))
+        if(!IFF_readLong(file, &voice8Header->volume, _8SVX_ID_VHDR, "volume"))
         {
             _8SVX_free((IFF_Chunk*)voice8Header);
             return NULL;
@@ -97,25 +95,25 @@ IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk)
 {
     const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
 
-    if(!IFF_writeULong(file, voice8Header->oneShotHiSamples, CHUNKID, "oneShotHiSamples"))
+    if(!IFF_writeULong(file, voice8Header->oneShotHiSamples, _8SVX_ID_VHDR, "oneShotHiSamples"))
         return FALSE;
 
-    if(!IFF_writeULong(file, voice8Header->repeatHiSamples, CHUNKID, "repeatHiSamples"))
+    if(!IFF_writeULong(file, voice8Header->repeatHiSamples, _8SVX_ID_VHDR, "repeatHiSamples"))
         return FALSE;
 
-    if(!IFF_writeULong(file, voice8Header->samplesPerHiCycle, CHUNKID, "samplesPerHiCycle"))
+    if(!IFF_writeULong(file, voice8Header->samplesPerHiCycle, _8SVX_ID_VHDR, "samplesPerHiCycle"))
         return FALSE;
 
-    if(!IFF_writeUWord(file, voice8Header->samplesPerSec, CHUNKID, "samplesPerSec"))
+    if(!IFF_writeUWord(file, voice8Header->samplesPerSec, _8SVX_ID_VHDR, "samplesPerSec"))
         return FALSE;
 
-    if(!IFF_writeUByte(file, voice8Header->ctOctave, CHUNKID, "ctOctave"))
+    if(!IFF_writeUByte(file, voice8Header->ctOctave, _8SVX_ID_VHDR, "ctOctave"))
         return FALSE;
 
-    if(!IFF_writeUByte(file, voice8Header->sCompression, CHUNKID, "sCompression"))
+    if(!IFF_writeUByte(file, voice8Header->sCompression, _8SVX_ID_VHDR, "sCompression"))
         return FALSE;
 
-    if(!IFF_writeLong(file, voice8Header->volume, CHUNKID, "volume"))
+    if(!IFF_writeLong(file, voice8Header->volume, _8SVX_ID_VHDR, "volume"))
         return FALSE;
 
     return TRUE;

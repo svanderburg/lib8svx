@@ -26,6 +26,9 @@
 #include <libiff/ifftypes.h>
 #include <libiff/group.h>
 #include <libiff/chunk.h>
+#include <libiff/id.h>
+
+#define _8SVX_ID_BODY IFF_MAKEID('B', 'O', 'D', 'Y')
 
 #ifdef __cplusplus
 extern "C" {

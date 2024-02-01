@@ -21,16 +21,14 @@
 
 #include "annotation.h"
 
-#define CHUNKID "ANNO"
-
 _8SVX_Annotation *_8SVX_createAnnotation(void)
 {
-    return (_8SVX_Annotation*)IFF_createRawChunk(CHUNKID);
+    return (_8SVX_Annotation*)IFF_createRawChunk(_8SVX_ID_ANNO);
 }
 
 IFF_Chunk *_8SVX_readAnnotation(FILE *file, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
+    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_ANNO, chunkSize);
 }
 
 IFF_Bool _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk)

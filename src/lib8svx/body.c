@@ -23,16 +23,14 @@
 #include <libiff/rawchunk.h>
 #include <libiff/util.h>
 
-#define CHUNKID "BODY"
-
 _8SVX_Body *_8SVX_createBody(void)
 {
-    return (_8SVX_Body*)IFF_allocateChunk(CHUNKID, sizeof(_8SVX_Body));
+    return (_8SVX_Body*)IFF_allocateChunk(_8SVX_ID_BODY, sizeof(_8SVX_Body));
 }
 
 IFF_Chunk *_8SVX_readBody(FILE *file, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
+    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_BODY, chunkSize);
 }
 
 IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk)

@@ -50,11 +50,11 @@ typedef struct
 }
 _8SVX_PLEnvelope;
 
-_8SVX_PLEnvelope *_8SVX_createPLEnvelope(const char *chunkId);
+_8SVX_PLEnvelope *_8SVX_createPLEnvelope(const IFF_ID chunkId);
 
 _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope);
 
-IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const char *chunkId);
+IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const IFF_ID chunkId);
 
 IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk);
 

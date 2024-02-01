@@ -23,6 +23,9 @@
 #define __8SVX_VOLUME_CONTROL
 
 #include "plenvelope.h"
+#include <libiff/id.h>
+
+#define _8SVX_ID_ATAK IFF_MAKEID('A', 'T', 'A', 'K')
 
 #ifdef __cplusplus
 extern "C" {

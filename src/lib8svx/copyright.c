@@ -21,16 +21,14 @@
 
 #include "copyright.h"
 
-#define CHUNKID "(c) "
-
 _8SVX_Copyright *_8SVX_createCopyright(void)
 {
-    return (_8SVX_Copyright*)IFF_createRawChunk(CHUNKID);
+    return (_8SVX_Copyright*)IFF_createRawChunk(_8SVX_ID_C);
 }
 
 IFF_Chunk *_8SVX_readCopyright(FILE *file, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
+    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_C, chunkSize);
 }
 
 IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk)

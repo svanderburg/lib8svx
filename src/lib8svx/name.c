@@ -21,16 +21,14 @@
 
 #include "name.h"
 
-#define CHUNKID "NAME"
-
 _8SVX_Name *_8SVX_createName(void)
 {
-    return (_8SVX_Name*)IFF_createRawChunk(CHUNKID);
+    return (_8SVX_Name*)IFF_createRawChunk(_8SVX_ID_NAME);
 }
 
 IFF_Chunk *_8SVX_readName(FILE *file, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
+    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_NAME, chunkSize);
 }
 
 IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk)

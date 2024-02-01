@@ -25,7 +25,7 @@
 #include <libiff/util.h>
 #include "8svx.h"
 
-_8SVX_PLEnvelope *_8SVX_createPLEnvelope(const char *chunkId)
+_8SVX_PLEnvelope *_8SVX_createPLEnvelope(const IFF_ID chunkId)
 {
     _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_allocateChunk(chunkId, sizeof(_8SVX_PLEnvelope));
 
@@ -50,7 +50,7 @@ _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
     return egPoint;
 }
 
-IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const char *chunkId)
+IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const IFF_ID chunkId)
 {
     _8SVX_PLEnvelope *plEnvelope = _8SVX_createPLEnvelope(chunkId);
 

@@ -32,7 +32,7 @@ _8SVX_Instrument *_8SVX_createInstrument()
 _8SVX_Instrument **_8SVX_extractInstruments(IFF_Chunk *chunk, unsigned int *instrumentsLength)
 {
     unsigned int _8svxFormsLength;
-    IFF_Form **_8svxForms = IFF_searchForms(chunk, "8SVX", &_8svxFormsLength);
+    IFF_Form **_8svxForms = IFF_searchForms(chunk, _8SVX_ID_8SVX, &_8svxFormsLength);
     *instrumentsLength = _8svxFormsLength;
 
     if(_8svxFormsLength == 0)
@@ -50,14 +50,14 @@ _8SVX_Instrument **_8SVX_extractInstruments(IFF_Chunk *chunk, unsigned int *inst
             IFF_Form *_8svxForm = _8svxForms[i];
             _8SVX_Instrument *instrument = (_8SVX_Instrument*)malloc(sizeof(_8SVX_Instrument));
 
-            instrument->voice8Header = (_8SVX_Voice8Header*)IFF_getChunkFromForm(_8svxForm, "VHDR");
-            instrument->name = (_8SVX_Name*)IFF_getChunkFromForm(_8svxForm, "NAME");
-            instrument->copyright = (_8SVX_Copyright*)IFF_getChunkFromForm(_8svxForm, "(c) ");
-            instrument->author = (_8SVX_Author*)IFF_getChunkFromForm(_8svxForm, "AUTH");
-            instrument->annotation = (_8SVX_Annotation**)IFF_getChunksFromForm(_8svxForm, "ANNO", &instrument->annotationLength);
-            instrument->volumeControl = (_8SVX_VolumeControl*)IFF_getChunkFromForm(_8svxForm, "ATAK");
-            instrument->playbackEnvelope = (_8SVX_PlaybackEnvelope*)IFF_getChunkFromForm(_8svxForm, "RLSE");
-            instrument->body = (_8SVX_Body*)IFF_getChunkFromForm(_8svxForm, "BODY");
+            instrument->voice8Header = (_8SVX_Voice8Header*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_VHDR);
+            instrument->name = (_8SVX_Name*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_NAME);
+            instrument->copyright = (_8SVX_Copyright*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_C);
+            instrument->author = (_8SVX_Author*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_AUTH);
+            instrument->annotation = (_8SVX_Annotation**)IFF_getChunksFromForm(_8svxForm, _8SVX_ID_ANNO, &instrument->annotationLength);
+            instrument->volumeControl = (_8SVX_VolumeControl*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_ATAK);
+            instrument->playbackEnvelope = (_8SVX_PlaybackEnvelope*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_RLSE);
+            instrument->body = (_8SVX_Body*)IFF_getChunkFromForm(_8svxForm, _8SVX_ID_BODY);
 
             instruments[i] = instrument;
         }
@@ -102,7 +102,7 @@ _8SVX_Sample *_8SVX_extractSamples(_8SVX_Instrument *instrument, unsigned int *s
 
 IFF_Form *_8SVX_convertInstrumentToForm(_8SVX_Instrument *instrument)
 {
-    IFF_Form *form = IFF_createForm("8SVX");
+    IFF_Form *form = IFF_createForm(_8SVX_ID_8SVX);
     unsigned int i;
 
     if(instrument->voice8Header != NULL)

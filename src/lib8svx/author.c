@@ -21,16 +21,14 @@
 
 #include "author.h"
 
-#define CHUNKID "AUTH"
-
 _8SVX_Author *_8SVX_createAuthor(void)
 {
-    return (_8SVX_Author*)IFF_createRawChunk(CHUNKID);
+    return (_8SVX_Author*)IFF_createRawChunk(_8SVX_ID_AUTH);
 }
 
 IFF_Chunk *_8SVX_readAuthor(FILE *file, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, CHUNKID, chunkSize);
+    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_AUTH, chunkSize);
 }
 
 IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk)

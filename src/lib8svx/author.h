@@ -29,6 +29,9 @@ extern "C" {
 #include <stdio.h>
 #include <libiff/chunk.h>
 #include <libiff/rawchunk.h>
+#include <libiff/id.h>
+
+#define _8SVX_ID_AUTH IFF_MAKEID('A', 'U', 'T', 'H')
 
 typedef IFF_RawChunk _8SVX_Author;
 

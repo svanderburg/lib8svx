@@ -24,6 +24,9 @@
 
 #include <stdio.h>
 #include <libiff/chunk.h>
+#include <libiff/id.h>
+
+#define _8SVX_ID_8SVX IFF_MAKEID('8', 'S', 'V', 'X')
 
 #ifdef __cplusplus
 extern "C" {
