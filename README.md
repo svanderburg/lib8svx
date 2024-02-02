@@ -113,10 +113,8 @@ instrument with a voice 8 header chunk:
 ```C
 #include <lib8svx/8svxinstrument.h>
 
-int main(int argc, char *argv[])
+static _8SVX_Voice8Header *createCustomVoice8Header(void)
 {
-    _8SVX_Instrument *instrument = _8SVX_createInstrument();
-
     _8SVX_Voice8Header *voice8Header = _8SVX_createVoice8Header();
 
     /* Create voice 8 header properties */
@@ -129,8 +127,15 @@ int main(int argc, char *argv[])
     voice8Header->sCompression = _8SVX_CMP_NONE;
     voice8Header->volume = _8SVX_MAX_VOLUME;
 
+    return voice8Header;
+}
+
+int main(int argc, char *argv[])
+{
+    _8SVX_Instrument *instrument = _8SVX_createInstrument();
+
     /* Attach voice 8 header to the instrument */
-    instrument->voice8Header = voice8Header;
+    instrument->voice8Header = createCustomVoice8Header();
 
     return 0;
 }

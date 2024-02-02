@@ -27,39 +27,39 @@
 int main(int argc, char *argv[])
 {
     IFF_Chunk *chunk = _8SVX_read("wave.8SVX");
-    
+
     if(chunk == NULL)
     {
-	fprintf(stderr, "Cannot open 8SVX file!\n");
-	return 1;
+        fprintf(stderr, "Cannot open 8SVX file!\n");
+        return 1;
     }
     else
     {
-	unsigned int instrumentsLength;
-	_8SVX_Instrument **instruments = _8SVX_extractInstruments(chunk, &instrumentsLength);
-	int status = 0;
-	
-	if(_8SVX_checkInstruments(chunk, instruments, instrumentsLength))
-	{
-	    IFF_Form *form = _8SVX_createTestForm();
-	    
-	    if(!_8SVX_compare(chunk, (const IFF_Chunk*)form))
-	    {
-		fprintf(stderr, "The 8SVX file is not identical to the original!\n");
-		status = 1;
-	    }
-	    
-	    _8SVX_free((IFF_Chunk*)form);
-	}
-	else
-	{
-	    fprintf(stderr, "The IFF file containing 8SVX instruments is not valid!\n");
-	    status = 1;
-	}
-	
-	_8SVX_freeInstruments(instruments, instrumentsLength);
-	_8SVX_free(chunk);
-	
-	return status;
+        unsigned int instrumentsLength;
+        _8SVX_Instrument **instruments = _8SVX_extractInstruments(chunk, &instrumentsLength);
+        int status = 0;
+
+        if(_8SVX_checkInstruments(chunk, instruments, instrumentsLength))
+        {
+            IFF_Form *form = _8SVX_createTestForm();
+
+            if(!_8SVX_compare(chunk, (const IFF_Chunk*)form))
+            {
+                fprintf(stderr, "The 8SVX file is not identical to the original!\n");
+                status = 1;
+            }
+
+            _8SVX_free((IFF_Chunk*)form);
+        }
+        else
+        {
+            fprintf(stderr, "The IFF file containing 8SVX instruments is not valid!\n");
+            status = 1;
+        }
+
+        _8SVX_freeInstruments(instruments, instrumentsLength);
+        _8SVX_free(chunk);
+
+        return status;
     }
 }

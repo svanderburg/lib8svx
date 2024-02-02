@@ -103,6 +103,8 @@ IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk)
 
 void _8SVX_freePLEnvelope(IFF_Chunk *chunk)
 {
+    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
+    free(plEnvelope->egPoint);
 }
 
 void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel)

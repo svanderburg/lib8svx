@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
     int status = 0;
 
     /* Write the form */
-    
+
     if(!_8SVX_write("wave.8SVX", (IFF_Chunk*)form))
     {
-	fprintf(stderr, "Error writing 8SVX file!\n");
-	status = 1;
+        fprintf(stderr, "Error writing 8SVX file!\n");
+        status = 1;
     }
-    
+
     /* Free stuff */
     _8SVX_free((IFF_Chunk*)form);
-    
+
     return status;
 }
