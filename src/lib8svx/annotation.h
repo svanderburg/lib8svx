@@ -29,17 +29,19 @@
 
 #define _8SVX_ID_ANNO IFF_MAKEID('A', 'N', 'N', 'O')
 
+#define _8SVX_ANNO_DEFAULT_SIZE 0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef IFF_RawChunk _8SVX_Annotation;
 
-_8SVX_Annotation *_8SVX_createAnnotation(void);
+IFF_Chunk *_8SVX_createAnnotation(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readAnnotation(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readAnnotation(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeAnnotation(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkAnnotation(const IFF_Chunk *chunk);
 

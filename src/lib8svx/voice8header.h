@@ -32,6 +32,8 @@
 
 #define _8SVX_ID_VHDR IFF_MAKEID('V', 'H', 'D', 'R')
 
+#define _8SVX_VHDR_DEFAULT_SIZE (3 * sizeof(IFF_ULong) + sizeof(IFF_UWord) + sizeof(IFF_UByte) + sizeof(IFF_UByte) + sizeof(IFF_Long))
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -53,16 +55,16 @@ typedef struct
     IFF_ULong oneShotHiSamples, repeatHiSamples, samplesPerHiCycle;
     IFF_UWord samplesPerSec;
     IFF_UByte ctOctave;
-    _8SVX_Compression sCompression;
+    IFF_UByte sCompression;
     IFF_Long volume;
 }
 _8SVX_Voice8Header;
 
-_8SVX_Voice8Header *_8SVX_createVoice8Header(void);
+IFF_Chunk *_8SVX_createVoice8Header(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readVoice8Header(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk);
 

@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 {
     char *inputFilename = NULL;
     char *outputFilename = NULL;
-    int compress = FALSE;
+    IFF_Bool compress = FALSE;
 
 #if _MSC_VER
     unsigned int optind = 1;

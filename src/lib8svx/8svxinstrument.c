@@ -102,7 +102,7 @@ _8SVX_Sample *_8SVX_extractSamples(_8SVX_Instrument *instrument, unsigned int *s
 
 IFF_Form *_8SVX_convertInstrumentToForm(_8SVX_Instrument *instrument)
 {
-    IFF_Form *form = IFF_createForm(_8SVX_ID_8SVX);
+    IFF_Form *form = IFF_createEmptyForm(_8SVX_ID_8SVX);
     unsigned int i;
 
     if(instrument->voice8Header != NULL)

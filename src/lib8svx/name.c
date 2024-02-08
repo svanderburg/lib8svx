@@ -21,19 +21,19 @@
 
 #include "name.h"
 
-_8SVX_Name *_8SVX_createName(void)
+IFF_Chunk *_8SVX_createName(const IFF_Long chunkSize)
 {
-    return (_8SVX_Name*)IFF_createRawChunk(_8SVX_ID_NAME);
+    return (IFF_Chunk*)IFF_createRawChunk(_8SVX_ID_NAME, chunkSize);
 }
 
-IFF_Chunk *_8SVX_readName(FILE *file, const IFF_Long chunkSize)
+IFF_Bool _8SVX_readName(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_NAME, chunkSize);
+    return IFF_readRawChunkData(file, (IFF_RawChunk*)chunk, bytesProcessed);
 }
 
-IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
+    return IFF_writeRawChunkData(file, (const IFF_RawChunk*)chunk, bytesProcessed);
 }
 
 IFF_Bool _8SVX_checkName(const IFF_Chunk *chunk)

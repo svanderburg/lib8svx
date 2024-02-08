@@ -28,17 +28,20 @@
 #include <libiff/id.h>
 
 #define _8SVX_ID_NAME IFF_MAKEID('N', 'A', 'M', 'E')
+
+#define _8SVX_NAME_DEFAULT_SIZE 0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef IFF_RawChunk _8SVX_Name;
 
-_8SVX_Name *_8SVX_createName(void);
+IFF_Chunk *_8SVX_createName(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readName(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readName(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkName(const IFF_Chunk *chunk);
 

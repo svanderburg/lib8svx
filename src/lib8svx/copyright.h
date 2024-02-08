@@ -29,17 +29,19 @@
 
 #define _8SVX_ID_C IFF_MAKEID('(', 'c', ')', ' ')
 
+#define _8SVX_C_DEFAULT_SIZE 0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef IFF_RawChunk _8SVX_Copyright;
 
-_8SVX_Copyright *_8SVX_createCopyright(void);
+IFF_Chunk *_8SVX_createCopyright(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readCopyright(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readCopyright(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkCopyright(const IFF_Chunk *chunk);
 

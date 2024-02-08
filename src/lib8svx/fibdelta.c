@@ -33,11 +33,11 @@ void _8SVX_unpackFibonacciDelta(_8SVX_Instrument *instrument)
     if(instrument->voice8Header->sCompression == _8SVX_CMP_FIBDELTA)
     {
         _8SVX_Body *body = instrument->body;
-        unsigned int bytesToDecompress = (body->chunkSize - 2) * 2;
+        IFF_Long bytesToDecompress = (body->chunkSize - 2) * 2;
         unsigned int chunkSize = bytesToDecompress + 1;
         IFF_Byte *compressedBodyData = body->chunkData;
         IFF_Byte *uncompressedBodyData = (IFF_Byte*)malloc(chunkSize * sizeof(IFF_Byte));
-        unsigned int i;
+        IFF_Long i;
 
         /* First byte of compressed data is padding, second is not compressed */
         uncompressedBodyData[0] = compressedBodyData[1];
@@ -78,7 +78,7 @@ void _8SVX_packFibonacciDelta(_8SVX_Instrument *instrument)
         unsigned int chunkSize = 2 + (body->chunkSize - 1) / 2;
         IFF_Byte *uncompressedBodyData = body->chunkData;
         IFF_Byte *compressedBodyData = (IFF_Byte*)malloc(chunkSize * sizeof(IFF_Byte));
-        unsigned int i;
+        IFF_Long i;
         unsigned int count = 2;
         IFF_Byte previousValue;
 

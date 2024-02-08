@@ -21,13 +21,14 @@
 
 #include "plenvelope.h"
 #include <stdlib.h>
+#include <libiff/field.h>
 #include <libiff/io.h>
 #include <libiff/util.h>
 #include "8svx.h"
 
-_8SVX_PLEnvelope *_8SVX_createPLEnvelope(const IFF_ID chunkId)
+IFF_Chunk *_8SVX_createPLEnvelope(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_allocateChunk(chunkId, sizeof(_8SVX_PLEnvelope));
+    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_allocateChunk(chunkId, chunkSize, sizeof(_8SVX_PLEnvelope));
 
     if(plEnvelope != NULL)
     {
@@ -35,62 +36,62 @@ _8SVX_PLEnvelope *_8SVX_createPLEnvelope(const IFF_ID chunkId)
         plEnvelope->egPoint = NULL;
     }
 
-    return plEnvelope;
+    return (IFF_Chunk*)plEnvelope;
 }
 
-_8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
+static _8SVX_EGPoint *allocatePointInPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
 {
     _8SVX_EGPoint *egPoint;
 
     plEnvelope->egPoint = (_8SVX_EGPoint*)realloc(plEnvelope->egPoint, (plEnvelope->egPointLength + 1) * sizeof(_8SVX_EGPoint));
     egPoint = &plEnvelope->egPoint[plEnvelope->egPointLength];
     plEnvelope->egPointLength++;
+
+    return egPoint;
+}
+
+_8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
+{
+    _8SVX_EGPoint *egPoint = allocatePointInPLEnvelope(plEnvelope);
     plEnvelope->chunkSize += sizeof(IFF_UWord) + sizeof(IFF_Long);
 
     return egPoint;
 }
 
-IFF_Chunk *_8SVX_readPLEnvelope(FILE *file, const IFF_Long chunkSize, const IFF_ID chunkId)
+IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    _8SVX_PLEnvelope *plEnvelope = _8SVX_createPLEnvelope(chunkId);
+    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
+    IFF_FieldStatus status;
 
-    if(plEnvelope != NULL)
+    while(*bytesProcessed < plEnvelope->chunkSize)
     {
-        while(plEnvelope->chunkSize < chunkSize)
-        {
-            _8SVX_EGPoint *egPoint = _8SVX_addToPLEnvelope(plEnvelope);
+        _8SVX_EGPoint *egPoint = allocatePointInPLEnvelope(plEnvelope);
 
-            if(!IFF_readUWord(file, &egPoint->duration, chunkId, "duration"))
-            {
-                free(egPoint);
-                _8SVX_free((IFF_Chunk*)plEnvelope);
-            }
+        if((status = IFF_readUWordField(file, &egPoint->duration, chunk, "duration", bytesProcessed)) != IFF_FIELD_MORE)
+            return IFF_deriveSuccess(status);
 
-            if(!IFF_readLong(file, &egPoint->dest, chunkId, "dest"))
-            {
-                free(egPoint);
-                _8SVX_free((IFF_Chunk*)plEnvelope);
-            }
-        }
+        if((status = IFF_readLongField(file, &egPoint->dest, chunk, "dest", bytesProcessed)) != IFF_FIELD_MORE)
+            return IFF_deriveSuccess(status);
     }
 
-    return (IFF_Chunk*)plEnvelope;
+    return TRUE;
 }
 
-IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
     const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
+    IFF_FieldStatus status;
     unsigned int i;
 
     for(i = 0; i < plEnvelope->egPointLength; i++)
     {
         _8SVX_EGPoint *egPoint = &plEnvelope->egPoint[i];
 
-        if(!IFF_writeUWord(file, egPoint->duration, plEnvelope->chunkId, "duration"))
-            return FALSE;
+        if((status = IFF_writeUWordField(file, egPoint->duration, chunk, "duration", bytesProcessed)) != IFF_FIELD_MORE)
+            return IFF_deriveSuccess(status);
 
-        if(!IFF_writeLong(file, egPoint->dest, plEnvelope->chunkId, "dest"))
-            return FALSE;
+        if((status = IFF_writeLongField(file, egPoint->dest, chunk, "dest", bytesProcessed)) != IFF_FIELD_MORE)
+            return IFF_deriveSuccess(status);
     }
 
     return TRUE;

@@ -21,9 +21,9 @@
 
 #include "volumecontrol.h"
 
-_8SVX_VolumeControl *_8SVX_createVolumeControl()
+IFF_Chunk *_8SVX_createVolumeControl(const IFF_Long chunkSize)
 {
-    return (_8SVX_VolumeControl*)_8SVX_createPLEnvelope(_8SVX_ID_ATAK);
+    return _8SVX_createPLEnvelope(_8SVX_ID_ATAK, chunkSize);
 }
 
 _8SVX_EGPoint *_8SVX_addToVolumeControl(_8SVX_VolumeControl *volumeControl)
@@ -31,14 +31,14 @@ _8SVX_EGPoint *_8SVX_addToVolumeControl(_8SVX_VolumeControl *volumeControl)
     return _8SVX_addToPLEnvelope((_8SVX_PLEnvelope*)volumeControl);
 }
 
-IFF_Chunk *_8SVX_readVolumeControl(FILE *file, const IFF_Long chunkSize)
+IFF_Bool _8SVX_readVolumeControl(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return _8SVX_readPLEnvelope(file, chunkSize, _8SVX_ID_ATAK);
+    return _8SVX_readPLEnvelope(file, chunk, bytesProcessed);
 }
 
-IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return _8SVX_writePLEnvelope(file, chunk);
+    return _8SVX_writePLEnvelope(file, chunk, bytesProcessed);
 }
 
 IFF_Bool _8SVX_checkVolumeControl(const IFF_Chunk *chunk)

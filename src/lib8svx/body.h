@@ -45,11 +45,11 @@ typedef struct
 }
 _8SVX_Body;
 
-_8SVX_Body *_8SVX_createBody(void);
+IFF_Chunk *_8SVX_createBody(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readBody(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readBody(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkBody(const IFF_Chunk *chunk);
 

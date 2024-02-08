@@ -27,19 +27,21 @@
 
 #define _8SVX_ID_RLSE IFF_MAKEID('R', 'L', 'S', 'E')
 
+#define _8SVX_RLSE_DEFAULT_SIZE 0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef _8SVX_PLEnvelope _8SVX_PlaybackEnvelope;
 
-_8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope(void);
+IFF_Chunk *_8SVX_createPlaybackEnvelope(const IFF_Long chunkSize);
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope);
 
-IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk);
 

@@ -21,9 +21,9 @@
 
 #include "playbackenvelope.h"
 
-_8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope()
+IFF_Chunk *_8SVX_createPlaybackEnvelope(const IFF_Long chunkSize)
 {
-    return (_8SVX_PlaybackEnvelope*)_8SVX_createPLEnvelope(_8SVX_ID_RLSE);
+    return _8SVX_createPLEnvelope(_8SVX_ID_RLSE, chunkSize);
 }
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope)
@@ -31,14 +31,14 @@ _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvel
     return _8SVX_addToPLEnvelope((_8SVX_PLEnvelope*)playbackEnvelope);
 }
 
-IFF_Chunk *_8SVX_readPlaybackEnvelope(FILE *file, const IFF_Long chunkSize)
+IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return _8SVX_readPLEnvelope(file, chunkSize, _8SVX_ID_RLSE);
+    return _8SVX_readPLEnvelope(file, chunk, bytesProcessed);
 }
 
-IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return _8SVX_writePLEnvelope(file, chunk);
+    return _8SVX_writePLEnvelope(file, chunk, bytesProcessed);
 }
 
 IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk)

@@ -21,7 +21,8 @@
 
 #ifndef __8SVX_PACK_H
 #define __8SVX_PACK_H
+#include <libiff/ifftypes.h>
 
-int pack(const char *inputFilename, const char *outputFilename, const int compress);
+int pack(const char *inputFilename, const char *outputFilename, const IFF_Bool compress);
 
 #endif

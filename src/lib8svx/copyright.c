@@ -21,19 +21,19 @@
 
 #include "copyright.h"
 
-_8SVX_Copyright *_8SVX_createCopyright(void)
+IFF_Chunk *_8SVX_createCopyright(const IFF_Long chunkSize)
 {
-    return (_8SVX_Copyright*)IFF_createRawChunk(_8SVX_ID_C);
+    return (IFF_Chunk*)IFF_createRawChunk(_8SVX_ID_C, chunkSize);
 }
 
-IFF_Chunk *_8SVX_readCopyright(FILE *file, const IFF_Long chunkSize)
+IFF_Bool _8SVX_readCopyright(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return (IFF_Chunk*)IFF_readRawChunk(file, _8SVX_ID_C, chunkSize);
+    return IFF_readRawChunkData(file, (IFF_RawChunk*)chunk, bytesProcessed);
 }
 
-IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
 {
-    return IFF_writeRawChunk(file, (const IFF_RawChunk*)chunk);
+    return IFF_writeRawChunkData(file, (const IFF_RawChunk*)chunk, bytesProcessed);
 }
 
 IFF_Bool _8SVX_checkCopyright(const IFF_Chunk *chunk)

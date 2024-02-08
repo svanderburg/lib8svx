@@ -24,12 +24,7 @@
 
 int _8SVX_prettyPrint(const char *filename, const int options)
 {
-    IFF_Chunk *chunk;
-
-    if(filename == NULL)
-        chunk = _8SVX_readFd(stdin);
-    else
-        chunk = _8SVX_read(filename);
+    IFF_Chunk *chunk = _8SVX_read(filename);
 
     if(chunk == NULL)
     {
@@ -44,7 +39,7 @@ int _8SVX_prettyPrint(const char *filename, const int options)
         if((options & _8SVXPP_DISABLE_CHECK) || _8SVX_check(chunk))
         {
             /* Print the file */
-            _8SVX_print(chunk, 0); 
+            _8SVX_print(chunk, 0);
 
             status = 0;
         }

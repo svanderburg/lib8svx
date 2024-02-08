@@ -34,9 +34,13 @@ extern "C" {
 
 IFF_Chunk *_8SVX_readFd(FILE *file);
 
+IFF_Chunk *_8SVX_readFile(const char *filename);
+
 IFF_Chunk *_8SVX_read(const char *filename);
 
 IFF_Bool _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk);
+
+IFF_Bool _8SVX_writeFile(const char *filename, const IFF_Chunk *chunk);
 
 IFF_Bool _8SVX_write(const char *filename, const IFF_Chunk *chunk);
 

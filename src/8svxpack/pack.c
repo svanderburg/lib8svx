@@ -26,14 +26,9 @@
 #include "8svxinstrument.h"
 #include "fibdelta.h"
 
-int pack(const char *inputFilename, const char *outputFilename, const int compress)
+int pack(const char *inputFilename, const char *outputFilename, const IFF_Bool compress)
 {
-    IFF_Chunk *chunk;
-
-    if(inputFilename == NULL)
-        chunk = _8SVX_readFd(stdin);
-    else
-        chunk = _8SVX_read(inputFilename);
+    IFF_Chunk *chunk = _8SVX_read(inputFilename);
 
     if(chunk == NULL)
     {
@@ -70,21 +65,10 @@ int pack(const char *inputFilename, const char *outputFilename, const int compre
                     _8SVX_unpackFibonacciDelta(instrument);
             }
 
-            if(outputFilename == NULL)
+            if(!_8SVX_write(outputFilename, chunk))
             {
-                if(!_8SVX_writeFd(stdout, chunk))
-                {
-                    fprintf(stderr, "Error writing 8SVX file!\n");
-                    status = 1;
-                }
-            }
-            else
-            {
-                if(!_8SVX_write(outputFilename, chunk))
-                {
-                    fprintf(stderr, "Error writing 8SVX file!\n");
-                    status = 1;
-                }
+                fprintf(stderr, "Error writing 8SVX file!\n");
+                status = 1;
             }
 
             _8SVX_freeInstruments(instruments, instrumentsLength);

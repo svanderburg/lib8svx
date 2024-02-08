@@ -27,19 +27,21 @@
 
 #define _8SVX_ID_ATAK IFF_MAKEID('A', 'T', 'A', 'K')
 
+#define _8SVX_ATAK_DEFAULT_SIZE 0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef _8SVX_PLEnvelope _8SVX_VolumeControl;
 
-_8SVX_VolumeControl *_8SVX_createVolumeControl(void);
+IFF_Chunk *_8SVX_createVolumeControl(const IFF_Long chunkSize);
 
 _8SVX_EGPoint *_8SVX_addToVolumeControl(_8SVX_VolumeControl *volumeControl);
 
-IFF_Chunk *_8SVX_readVolumeControl(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readVolumeControl(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkVolumeControl(const IFF_Chunk *chunk);
 

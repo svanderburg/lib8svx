@@ -33,13 +33,15 @@ extern "C" {
 
 #define _8SVX_ID_AUTH IFF_MAKEID('A', 'U', 'T', 'H')
 
+#define _8SVX_AUTH_DEFAULT_SIZE 0
+
 typedef IFF_RawChunk _8SVX_Author;
 
-_8SVX_Author *_8SVX_createAuthor(void);
+IFF_Chunk *_8SVX_createAuthor(const IFF_Long chunkSize);
 
-IFF_Chunk *_8SVX_readAuthor(FILE *file, const IFF_Long chunkSize);
+IFF_Bool _8SVX_readAuthor(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
 
 IFF_Bool _8SVX_checkAuthor(const IFF_Chunk *chunk);
 
