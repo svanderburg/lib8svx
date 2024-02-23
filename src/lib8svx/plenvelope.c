@@ -28,7 +28,7 @@
 
 IFF_Chunk *_8SVX_createPLEnvelope(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_allocateChunk(chunkId, chunkSize, sizeof(_8SVX_PLEnvelope));
+    _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)IFF_createChunk(chunkId, chunkSize, sizeof(_8SVX_PLEnvelope));
 
     if(plEnvelope != NULL)
     {

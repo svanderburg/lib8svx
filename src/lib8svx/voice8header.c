@@ -28,7 +28,7 @@
 
 IFF_Chunk *_8SVX_createVoice8Header(const IFF_Long chunkSize)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_allocateChunk(_8SVX_ID_VHDR, chunkSize, sizeof(_8SVX_Voice8Header));
+    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_createChunk(_8SVX_ID_VHDR, chunkSize, sizeof(_8SVX_Voice8Header));
 
     if(voice8Header != NULL)
     {
