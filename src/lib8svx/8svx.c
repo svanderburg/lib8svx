@@ -31,9 +31,9 @@
 #include "voice8header.h"
 
 #define _8SVX_NUM_OF_FORM_TYPES 1
-#define _8SVX_NUM_OF_EXTENSION_CHUNKS 8
+#define _8SVX_NUM_OF_CHUNK_TYPES 8
 
-static IFF_FormExtension _8svxFormExtension[] = {
+static IFF_ChunkType _8svxChunkTypes[] = {
     {_8SVX_ID_C, &_8SVX_createCopyright, &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright, &_8SVX_compareCopyright},
     {_8SVX_ID_ANNO, &_8SVX_createAnnotation, &_8SVX_readAnnotation, &_8SVX_writeAnnotation, &_8SVX_checkAnnotation, &_8SVX_freeAnnotation, &_8SVX_printAnnotation, &_8SVX_compareAnnotation},
     {_8SVX_ID_ATAK, &_8SVX_createVolumeControl, &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl, &_8SVX_compareVolumeControl},
@@ -44,56 +44,60 @@ static IFF_FormExtension _8svxFormExtension[] = {
     {_8SVX_ID_VHDR, &_8SVX_createVoice8Header, &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header, &_8SVX_compareVoice8Header}
 };
 
-static IFF_Extension extension[] = {
-    {_8SVX_ID_8SVX, _8SVX_NUM_OF_EXTENSION_CHUNKS, _8svxFormExtension}
+static IFF_FormChunkTypes formChunkTypes[] = {
+    {_8SVX_ID_8SVX, _8SVX_NUM_OF_CHUNK_TYPES, _8svxChunkTypes}
+};
+
+static IFF_ChunkRegistry chunkRegistry = {
+    _8SVX_NUM_OF_FORM_TYPES, formChunkTypes
 };
 
 IFF_Chunk *_8SVX_readFd(FILE *file)
 {
-    return IFF_readFd(file, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_readFd(file, &chunkRegistry);
 }
 
 IFF_Chunk *_8SVX_readFile(const char *filename)
 {
-    return IFF_readFile(filename, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_readFile(filename, &chunkRegistry);
 }
 
 IFF_Chunk *_8SVX_read(const char *filename)
 {
-    return IFF_read(filename, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_read(filename, &chunkRegistry);
 }
 
 IFF_Bool _8SVX_writeFd(FILE *file, const IFF_Chunk *chunk)
 {
-    return IFF_writeFd(file, chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_writeFd(file, chunk, &chunkRegistry);
 }
 
 IFF_Bool _8SVX_writeFile(const char *filename, const IFF_Chunk *chunk)
 {
-    return IFF_writeFile(filename, chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_writeFile(filename, chunk, &chunkRegistry);
 }
 
 IFF_Bool _8SVX_write(const char *filename, const IFF_Chunk *chunk)
 {
-    return IFF_write(filename, chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_write(filename, chunk, &chunkRegistry);
 }
 
 IFF_Bool _8SVX_check(const IFF_Chunk *chunk)
 {
-    return IFF_check(chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_check(chunk, &chunkRegistry);
 }
 
 void _8SVX_free(IFF_Chunk *chunk)
 {
-    IFF_free(chunk, extension, _8SVX_NUM_OF_FORM_TYPES);
+    IFF_free(chunk, &chunkRegistry);
 }
 
 void _8SVX_print(const IFF_Chunk *chunk, const unsigned int indentLevel)
 {
-    IFF_print(chunk, 0, extension, _8SVX_NUM_OF_FORM_TYPES);
+    IFF_print(chunk, indentLevel, &chunkRegistry);
 }
 
 IFF_Bool _8SVX_compare(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
 {
-    return IFF_compare(chunk1, chunk2, extension, _8SVX_NUM_OF_FORM_TYPES);
+    return IFF_compare(chunk1, chunk2, &chunkRegistry);
 }
