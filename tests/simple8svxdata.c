@@ -7,7 +7,7 @@
 
 static _8SVX_Voice8Header *createTestVoice8Header(void)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)_8SVX_createVoice8Header(_8SVX_VHDR_DEFAULT_SIZE);
+    _8SVX_Voice8Header *voice8Header = _8SVX_createVoice8Header();
 
     voice8Header->oneShotHiSamples = SAMPLE_LENGTH;
     voice8Header->repeatHiSamples = 0;
@@ -22,35 +22,35 @@ static _8SVX_Voice8Header *createTestVoice8Header(void)
 
 static _8SVX_Name *createTestName(void)
 {
-    _8SVX_Name *name = (_8SVX_Name*)_8SVX_createName(_8SVX_NAME_DEFAULT_SIZE);
+    _8SVX_Name *name = _8SVX_createName(0);
     IFF_setTextData((IFF_RawChunk*)name, "Wave");
     return name;
 }
 
 static _8SVX_Copyright *createTestCopyright(void)
 {
-    _8SVX_Copyright *copyright = (_8SVX_Copyright*)_8SVX_createCopyright(_8SVX_C_DEFAULT_SIZE);
+    _8SVX_Copyright *copyright = _8SVX_createCopyright(0);
     IFF_setTextData((IFF_RawChunk*)copyright, "Copyright 2012 Sander van der Burg");
     return copyright;
 }
 
 static _8SVX_Author *createTestAuthor(void)
 {
-    _8SVX_Author *author = (_8SVX_Author*)_8SVX_createAuthor(_8SVX_AUTH_DEFAULT_SIZE);
+    _8SVX_Author *author = _8SVX_createAuthor(0);
     IFF_setTextData((IFF_RawChunk*)author, "Sander van der Burg");
     return author;
 }
 
 static _8SVX_Annotation *createTestAnnotation(void)
 {
-    _8SVX_Annotation *annotation = (_8SVX_Annotation*)_8SVX_createAnnotation(_8SVX_ANNO_DEFAULT_SIZE);
+    _8SVX_Annotation *annotation = _8SVX_createAnnotation(0);
     IFF_setTextData((IFF_RawChunk*)annotation, "Annotation");
     return annotation;
 }
 
 static _8SVX_PlaybackEnvelope *createTestPlaybackEnvelope(void)
 {
-    _8SVX_PlaybackEnvelope *playbackEnvelope = (_8SVX_PlaybackEnvelope*)_8SVX_createPlaybackEnvelope(_8SVX_ATAK_DEFAULT_SIZE);
+    _8SVX_PlaybackEnvelope *playbackEnvelope = _8SVX_createPlaybackEnvelope();
 
     _8SVX_EGPoint *egPoint = _8SVX_addToPlaybackEnvelope(playbackEnvelope);
     egPoint->duration = 10;
@@ -61,7 +61,7 @@ static _8SVX_PlaybackEnvelope *createTestPlaybackEnvelope(void)
 
 static _8SVX_VolumeControl *createTestVolumeControl(void)
 {
-    _8SVX_VolumeControl *volumeControl = (_8SVX_VolumeControl*)_8SVX_createVolumeControl(_8SVX_RLSE_DEFAULT_SIZE);
+    _8SVX_VolumeControl *volumeControl = _8SVX_createVolumeControl();
 
     _8SVX_EGPoint *egPoint = _8SVX_addToVolumeControl(volumeControl);
     egPoint->duration = 20;

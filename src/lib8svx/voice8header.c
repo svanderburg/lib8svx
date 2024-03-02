@@ -26,9 +26,9 @@
 #include <libiff/error.h>
 #include "8svx.h"
 
-IFF_Chunk *_8SVX_createVoice8Header(const IFF_Long chunkSize)
+IFF_Chunk *_8SVX_createVoice8HeaderChunk(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_createChunk(_8SVX_ID_VHDR, chunkSize, sizeof(_8SVX_Voice8Header));
+    _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)IFF_createChunk(chunkId, chunkSize, sizeof(_8SVX_Voice8Header));
 
     if(voice8Header != NULL)
     {
@@ -44,7 +44,12 @@ IFF_Chunk *_8SVX_createVoice8Header(const IFF_Long chunkSize)
     return (IFF_Chunk*)voice8Header;
 }
 
-IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+_8SVX_Voice8Header *_8SVX_createVoice8Header(void)
+{
+    return (_8SVX_Voice8Header*)_8SVX_createVoice8HeaderChunk(_8SVX_ID_VHDR, _8SVX_VHDR_DEFAULT_SIZE);
+}
+
+IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
     _8SVX_Voice8Header *voice8Header = (_8SVX_Voice8Header*)chunk;
     IFF_FieldStatus status;
@@ -73,7 +78,7 @@ IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesPro
     return TRUE;
 }
 
-IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
     const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
     IFF_FieldStatus status;
@@ -102,7 +107,7 @@ IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, IFF_Long *b
     return TRUE;
 }
 
-IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
     const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
 
@@ -115,11 +120,11 @@ IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk)
     return TRUE;
 }
 
-void _8SVX_freeVoice8Header(IFF_Chunk *chunk)
+void _8SVX_freeVoice8Header(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
 }
 
-void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel)
+void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry)
 {
     const _8SVX_Voice8Header *voice8Header = (const _8SVX_Voice8Header*)chunk;
 
@@ -132,7 +137,7 @@ void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLe
     IFF_printIndent(stdout, indentLevel, "volume = %d;\n", voice8Header->volume);
 }
 
-IFF_Bool _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry)
 {
     const _8SVX_Voice8Header *voice8Header1 = (const _8SVX_Voice8Header*)chunk1;
     const _8SVX_Voice8Header *voice8Header2 = (const _8SVX_Voice8Header*)chunk2;

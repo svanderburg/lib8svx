@@ -23,32 +23,37 @@
 #include <libiff/rawchunk.h>
 #include <libiff/util.h>
 
-IFF_Chunk *_8SVX_createBody(const IFF_Long chunkSize)
+IFF_Chunk *_8SVX_createBodyChunk(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_createRawChunk(_8SVX_ID_BODY, chunkSize);
+    return IFF_createRawChunk(chunkId, chunkSize);
 }
 
-IFF_Bool _8SVX_readBody(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+_8SVX_Body *_8SVX_createBody(const IFF_Long chunkSize)
 {
-    return IFF_readRawChunkData(file, (IFF_RawChunk*)chunk, bytesProcessed);
+    return (_8SVX_Body*)_8SVX_createBodyChunk(_8SVX_ID_BODY, chunkSize);
 }
 
-IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_readBody(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
-    return IFF_writeRawChunkData(file, (const IFF_RawChunk*)chunk, bytesProcessed);
+    return IFF_readRawChunk(file, chunk, chunkRegistry, bytesProcessed);
 }
 
-IFF_Bool _8SVX_checkBody(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeBody(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
+{
+    return IFF_writeRawChunk(file, chunk, chunkRegistry, bytesProcessed);
+}
+
+IFF_Bool _8SVX_checkBody(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
     return TRUE;
 }
 
-void _8SVX_freeBody(IFF_Chunk *chunk)
+void _8SVX_freeBody(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
-    IFF_freeRawChunk((IFF_RawChunk*)chunk);
+    IFF_freeRawChunk(chunk, chunkRegistry);
 }
 
-void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel)
+void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry)
 {
     _8SVX_Body *body = (_8SVX_Body*)chunk;
     IFF_Long i;
@@ -74,7 +79,7 @@ void _8SVX_printBody(const IFF_Chunk *chunk, const unsigned int indentLevel)
     IFF_printIndent(stdout, indentLevel, ";\n");
 }
 
-IFF_Bool _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareBody(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry)
 {
-    return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
+    return IFF_compareRawChunk(chunk1, chunk2, chunkRegistry);
 }

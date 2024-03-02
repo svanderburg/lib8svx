@@ -21,6 +21,7 @@
 
 #include "8svx.h"
 #include <libiff/iff.h>
+#include <libiff/defaultregistry.h>
 #include "copyright.h"
 #include "annotation.h"
 #include "author.h"
@@ -30,27 +31,30 @@
 #include "name.h"
 #include "voice8header.h"
 
-#define _8SVX_NUM_OF_FORM_TYPES 1
+#define _8SVX_NUM_OF_FORM_CHUNK_TYPES 1
 #define _8SVX_NUM_OF_CHUNK_TYPES 8
 
 static IFF_ChunkType _8svxChunkTypes[] = {
-    {_8SVX_ID_C, &_8SVX_createCopyright, &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright, &_8SVX_compareCopyright},
-    {_8SVX_ID_ANNO, &_8SVX_createAnnotation, &_8SVX_readAnnotation, &_8SVX_writeAnnotation, &_8SVX_checkAnnotation, &_8SVX_freeAnnotation, &_8SVX_printAnnotation, &_8SVX_compareAnnotation},
-    {_8SVX_ID_ATAK, &_8SVX_createVolumeControl, &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl, &_8SVX_compareVolumeControl},
-    {_8SVX_ID_AUTH, &_8SVX_createAuthor, &_8SVX_readAuthor, &_8SVX_writeAuthor, &_8SVX_checkAuthor, &_8SVX_freeAuthor, &_8SVX_printAuthor, &_8SVX_compareAuthor},
-    {_8SVX_ID_BODY, &_8SVX_createBody, &_8SVX_readBody, &_8SVX_writeBody, &_8SVX_checkBody, &_8SVX_freeBody, &_8SVX_printBody, &_8SVX_compareBody},
-    {_8SVX_ID_NAME, &_8SVX_createName, &_8SVX_readName, &_8SVX_writeName, &_8SVX_checkName, &_8SVX_freeName, &_8SVX_printName, &_8SVX_compareName},
-    {_8SVX_ID_RLSE, &_8SVX_createPlaybackEnvelope, &_8SVX_readPlaybackEnvelope, &_8SVX_writePlaybackEnvelope, &_8SVX_checkPlaybackEnvelope, &_8SVX_freePlaybackEnvelope, &_8SVX_printPlaybackEnvelope, &_8SVX_comparePlaybackEnvelope},
-    {_8SVX_ID_VHDR, &_8SVX_createVoice8Header, &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header, &_8SVX_compareVoice8Header}
+    {_8SVX_ID_C, &_8SVX_createCopyrightChunk, &_8SVX_readCopyright, &_8SVX_writeCopyright, &_8SVX_checkCopyright, &_8SVX_freeCopyright, &_8SVX_printCopyright, &_8SVX_compareCopyright},
+    {_8SVX_ID_ANNO, &_8SVX_createAnnotationChunk, &_8SVX_readAnnotation, &_8SVX_writeAnnotation, &_8SVX_checkAnnotation, &_8SVX_freeAnnotation, &_8SVX_printAnnotation, &_8SVX_compareAnnotation},
+    {_8SVX_ID_ATAK, &_8SVX_createVolumeControlChunk, &_8SVX_readVolumeControl, &_8SVX_writeVolumeControl, &_8SVX_checkVolumeControl, &_8SVX_freeVolumeControl, &_8SVX_printVolumeControl, &_8SVX_compareVolumeControl},
+    {_8SVX_ID_AUTH, &_8SVX_createAuthorChunk, &_8SVX_readAuthor, &_8SVX_writeAuthor, &_8SVX_checkAuthor, &_8SVX_freeAuthor, &_8SVX_printAuthor, &_8SVX_compareAuthor},
+    {_8SVX_ID_BODY, &_8SVX_createBodyChunk, &_8SVX_readBody, &_8SVX_writeBody, &_8SVX_checkBody, &_8SVX_freeBody, &_8SVX_printBody, &_8SVX_compareBody},
+    {_8SVX_ID_NAME, &_8SVX_createNameChunk, &_8SVX_readName, &_8SVX_writeName, &_8SVX_checkName, &_8SVX_freeName, &_8SVX_printName, &_8SVX_compareName},
+    {_8SVX_ID_RLSE, &_8SVX_createPlaybackEnvelopeChunk, &_8SVX_readPlaybackEnvelope, &_8SVX_writePlaybackEnvelope, &_8SVX_checkPlaybackEnvelope, &_8SVX_freePlaybackEnvelope, &_8SVX_printPlaybackEnvelope, &_8SVX_comparePlaybackEnvelope},
+    {_8SVX_ID_VHDR, &_8SVX_createVoice8HeaderChunk, &_8SVX_readVoice8Header, &_8SVX_writeVoice8Header, &_8SVX_checkVoice8Header, &_8SVX_freeVoice8Header, &_8SVX_printVoice8Header, &_8SVX_compareVoice8Header}
 };
+
+static IFF_ChunkTypesNode _8svxChunkTypesNode = {
+    _8SVX_NUM_OF_CHUNK_TYPES, _8svxChunkTypes, NULL
+};
+
 
 static IFF_FormChunkTypes formChunkTypes[] = {
-    {_8SVX_ID_8SVX, _8SVX_NUM_OF_CHUNK_TYPES, _8svxChunkTypes}
+    {_8SVX_ID_8SVX, &_8svxChunkTypesNode}
 };
 
-static IFF_ChunkRegistry chunkRegistry = {
-    _8SVX_NUM_OF_FORM_TYPES, formChunkTypes
-};
+static IFF_ChunkRegistry chunkRegistry = IFF_EXTEND_DEFAULT_REGISTRY_WITH_FORM_CHUNK_TYPES(_8SVX_NUM_OF_FORM_CHUNK_TYPES, formChunkTypes);
 
 IFF_Chunk *_8SVX_readFd(FILE *file)
 {

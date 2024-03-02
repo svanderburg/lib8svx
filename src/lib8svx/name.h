@@ -37,19 +37,21 @@ extern "C" {
 
 typedef IFF_RawChunk _8SVX_Name;
 
-IFF_Chunk *_8SVX_createName(const IFF_Long chunkSize);
+IFF_Chunk *_8SVX_createNameChunk(const IFF_ID chunkId, const IFF_Long chunkSize);
 
-IFF_Bool _8SVX_readName(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+_8SVX_Name *_8SVX_createName(const IFF_Long chunkSize);
 
-IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readName(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkName(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeName(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-void _8SVX_freeName(IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkName(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printName(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_freeName(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_compareName(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+void _8SVX_printName(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
+
+IFF_Bool _8SVX_compareName(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }

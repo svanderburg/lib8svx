@@ -35,21 +35,23 @@ extern "C" {
 
 typedef _8SVX_PLEnvelope _8SVX_VolumeControl;
 
-IFF_Chunk *_8SVX_createVolumeControl(const IFF_Long chunkSize);
+IFF_Chunk *_8SVX_createVolumeControlChunk(const IFF_ID chunkId, const IFF_Long chunkSize);
+
+_8SVX_VolumeControl *_8SVX_createVolumeControl(void);
 
 _8SVX_EGPoint *_8SVX_addToVolumeControl(_8SVX_VolumeControl *volumeControl);
 
-IFF_Bool _8SVX_readVolumeControl(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readVolumeControl(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_writeVolumeControl(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkVolumeControl(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkVolumeControl(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_freeVolumeControl(IFF_Chunk *chunk);
+void _8SVX_freeVolumeControl(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printVolumeControl(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_printVolumeControl(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_compareVolumeControl(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_compareVolumeControl(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }

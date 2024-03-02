@@ -21,37 +21,42 @@
 
 #include "author.h"
 
-IFF_Chunk *_8SVX_createAuthor(const IFF_Long chunkSize)
+IFF_Chunk *_8SVX_createAuthorChunk(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    return (IFF_Chunk*)IFF_createRawChunk(_8SVX_ID_AUTH, chunkSize);
+    return (IFF_Chunk*)IFF_createRawChunk(chunkId, chunkSize);
 }
 
-IFF_Bool _8SVX_readAuthor(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+_8SVX_Author *_8SVX_createAuthor(const IFF_Long chunkSize)
 {
-    return IFF_readRawChunkData(file, (IFF_RawChunk*)chunk, bytesProcessed);
+    return (_8SVX_Author*)_8SVX_createAuthorChunk(_8SVX_ID_AUTH, chunkSize);
 }
 
-IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_readAuthor(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
-    return IFF_writeRawChunkData(file, (const IFF_RawChunk*)chunk, bytesProcessed);
+    return IFF_readRawChunk(file, chunk, chunkRegistry, bytesProcessed);
 }
 
-IFF_Bool _8SVX_checkAuthor(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_writeAuthor(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
+{
+    return IFF_writeRawChunk(file, chunk, chunkRegistry, bytesProcessed);
+}
+
+IFF_Bool _8SVX_checkAuthor(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
     return TRUE;
 }
 
-void _8SVX_freeAuthor(IFF_Chunk *chunk)
+void _8SVX_freeAuthor(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
-    IFF_freeRawChunk((IFF_RawChunk*)chunk);
+    IFF_freeRawChunk(chunk, chunkRegistry);
 }
 
-void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel)
+void _8SVX_printAuthor(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry)
 {
     IFF_printText((IFF_RawChunk*)chunk, indentLevel);
 }
 
-IFF_Bool _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_compareAuthor(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry)
 {
-    return IFF_compareRawChunk((const IFF_RawChunk*)chunk1, (const IFF_RawChunk*)chunk2);
+    return IFF_compareRawChunk(chunk1, chunk2, chunkRegistry);
 }

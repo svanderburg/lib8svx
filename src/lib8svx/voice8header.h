@@ -60,19 +60,21 @@ typedef struct
 }
 _8SVX_Voice8Header;
 
-IFF_Chunk *_8SVX_createVoice8Header(const IFF_Long chunkSize);
+IFF_Chunk *_8SVX_createVoice8HeaderChunk(const IFF_ID chunkId, const IFF_Long chunkSize);
 
-IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+_8SVX_Voice8Header *_8SVX_createVoice8Header(void);
 
-IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readVoice8Header(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeVoice8Header(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-void _8SVX_freeVoice8Header(IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkVoice8Header(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_freeVoice8Header(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+void _8SVX_printVoice8Header(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
+
+IFF_Bool _8SVX_compareVoice8Header(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }

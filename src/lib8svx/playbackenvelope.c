@@ -21,9 +21,14 @@
 
 #include "playbackenvelope.h"
 
-IFF_Chunk *_8SVX_createPlaybackEnvelope(const IFF_Long chunkSize)
+IFF_Chunk *_8SVX_createPlaybackEnvelopeChunk(const IFF_ID chunkId, const IFF_Long chunkSize)
 {
-    return _8SVX_createPLEnvelope(_8SVX_ID_RLSE, chunkSize);
+    return _8SVX_createPLEnvelope(chunkId, chunkSize);
+}
+
+_8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope(void)
+{
+    return (_8SVX_PlaybackEnvelope*)_8SVX_createPlaybackEnvelopeChunk(_8SVX_ID_RLSE, _8SVX_RLSE_DEFAULT_SIZE);
 }
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope)
@@ -31,32 +36,32 @@ _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvel
     return _8SVX_addToPLEnvelope((_8SVX_PLEnvelope*)playbackEnvelope);
 }
 
-IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
-    return _8SVX_readPLEnvelope(file, chunk, bytesProcessed);
+    return _8SVX_readPLEnvelope(file, chunk, chunkRegistry, bytesProcessed);
 }
 
-IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
-    return _8SVX_writePLEnvelope(file, chunk, bytesProcessed);
+    return _8SVX_writePLEnvelope(file, chunk, chunkRegistry, bytesProcessed);
 }
 
-IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
-    return _8SVX_checkPLEnvelope(chunk);
+    return _8SVX_checkPLEnvelope(chunk, chunkRegistry);
 }
 
-void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk)
+void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
-    _8SVX_freePLEnvelope(chunk);
+    _8SVX_freePLEnvelope(chunk, chunkRegistry);
 }
 
-void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel)
+void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry)
 {
-    _8SVX_printPLEnvelope(chunk, indentLevel);
+    _8SVX_printPLEnvelope(chunk, indentLevel, chunkRegistry);
 }
 
-IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry)
 {
-    return _8SVX_comparePLEnvelope(chunk1, chunk2);
+    return _8SVX_comparePLEnvelope(chunk1, chunk2, chunkRegistry);
 }

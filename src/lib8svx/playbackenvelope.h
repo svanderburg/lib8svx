@@ -35,21 +35,23 @@ extern "C" {
 
 typedef _8SVX_PLEnvelope _8SVX_PlaybackEnvelope;
 
-IFF_Chunk *_8SVX_createPlaybackEnvelope(const IFF_Long chunkSize);
+IFF_Chunk *_8SVX_createPlaybackEnvelopeChunk(const IFF_ID chunkId, const IFF_Long chunkSize);
+
+_8SVX_PlaybackEnvelope *_8SVX_createPlaybackEnvelope(void);
 
 _8SVX_EGPoint *_8SVX_addToPlaybackEnvelope(_8SVX_PlaybackEnvelope *playbackEnvelope);
 
-IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readPlaybackEnvelope(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_writePlaybackEnvelope(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkPlaybackEnvelope(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk);
+void _8SVX_freePlaybackEnvelope(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_printPlaybackEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_comparePlaybackEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }

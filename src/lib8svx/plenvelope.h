@@ -54,17 +54,17 @@ IFF_Chunk *_8SVX_createPLEnvelope(const IFF_ID chunkId, const IFF_Long chunkSize
 
 _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope);
 
-IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_freePLEnvelope(IFF_Chunk *chunk);
+void _8SVX_freePLEnvelope(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }

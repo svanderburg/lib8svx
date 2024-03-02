@@ -58,7 +58,7 @@ _8SVX_EGPoint *_8SVX_addToPLEnvelope(_8SVX_PLEnvelope *plEnvelope)
     return egPoint;
 }
 
-IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
     _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
     IFF_FieldStatus status;
@@ -77,7 +77,7 @@ IFF_Bool _8SVX_readPLEnvelope(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProce
     return TRUE;
 }
 
-IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed)
+IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed)
 {
     const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     IFF_FieldStatus status;
@@ -97,18 +97,18 @@ IFF_Bool _8SVX_writePLEnvelope(FILE *file, const IFF_Chunk *chunk, IFF_Long *byt
     return TRUE;
 }
 
-IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk)
+IFF_Bool _8SVX_checkPLEnvelope(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
     return TRUE;
 }
 
-void _8SVX_freePLEnvelope(IFF_Chunk *chunk)
+void _8SVX_freePLEnvelope(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry)
 {
     _8SVX_PLEnvelope *plEnvelope = (_8SVX_PLEnvelope*)chunk;
     free(plEnvelope->egPoint);
 }
 
-void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel)
+void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry)
 {
     const _8SVX_PLEnvelope *plEnvelope = (const _8SVX_PLEnvelope*)chunk;
     unsigned int i;
@@ -120,7 +120,7 @@ void _8SVX_printPLEnvelope(const IFF_Chunk *chunk, const unsigned int indentLeve
     }
 }
 
-IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2)
+IFF_Bool _8SVX_comparePLEnvelope(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry)
 {
     const _8SVX_PLEnvelope *plEnvelope1 = (const _8SVX_PLEnvelope*)chunk1;
     const _8SVX_PLEnvelope *plEnvelope2 = (const _8SVX_PLEnvelope*)chunk2;

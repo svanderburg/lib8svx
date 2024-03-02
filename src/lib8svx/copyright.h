@@ -37,19 +37,21 @@ extern "C" {
 
 typedef IFF_RawChunk _8SVX_Copyright;
 
-IFF_Chunk *_8SVX_createCopyright(const IFF_Long chunkSize);
+IFF_Chunk *_8SVX_createCopyrightChunk(const IFF_ID chunkId, const IFF_Long chunkSize);
 
-IFF_Bool _8SVX_readCopyright(FILE *file, IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+_8SVX_Copyright *_8SVX_createCopyright(const IFF_Long chunkSize);
 
-IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk, IFF_Long *bytesProcessed);
+IFF_Bool _8SVX_readCopyright(FILE *file, IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-IFF_Bool _8SVX_checkCopyright(const IFF_Chunk *chunk);
+IFF_Bool _8SVX_writeCopyright(FILE *file, const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry, IFF_Long *bytesProcessed);
 
-void _8SVX_freeCopyright(IFF_Chunk *chunk);
+IFF_Bool _8SVX_checkCopyright(const IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-void _8SVX_printCopyright(const IFF_Chunk *chunk, const unsigned int indentLevel);
+void _8SVX_freeCopyright(IFF_Chunk *chunk, const IFF_ChunkRegistry *chunkRegistry);
 
-IFF_Bool _8SVX_compareCopyright(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2);
+void _8SVX_printCopyright(const IFF_Chunk *chunk, const unsigned int indentLevel, const IFF_ChunkRegistry *chunkRegistry);
+
+IFF_Bool _8SVX_compareCopyright(const IFF_Chunk *chunk1, const IFF_Chunk *chunk2, const IFF_ChunkRegistry *chunkRegistry);
 
 #ifdef __cplusplus
 }
